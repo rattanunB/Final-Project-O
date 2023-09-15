@@ -58,10 +58,18 @@
   height: 40px;
   width: 200px;
   border-radius: 10px;
+  border: 2px solid rgba(236, 120, 84, 1);
   color: rgb(255, 255, 255);
   background-color: rgba(236, 120, 84, 1);
   border: none;
   margin-top: 25px;
+}
+
+button:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgba(236, 120, 84, 1);
+  border: 2px solid rgba(236, 120, 84, 1);
+
 }
 
 .btn-getstart {
