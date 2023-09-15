@@ -1,0 +1,49 @@
+.activity-type {
+  display: flex;
+  width: 100%;
+  height: 300px;
+  margin: 50px 30px;
+
+}
+
+.activity-image {
+  width: 35%;
+  height: 100%;
+}
+
+.activity-image img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  border-radius: 15px;
+  
+}
+
+.activity-detail {
+  width: 65%;
+  height: 300px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-detail h3 {
+  color: rgba(236, 120, 84, 1);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  width: 200px;
+  margin: 0;
+}
+
+.activity-detail p {
+  font-family: Arial, Helvetica, sans-serif;
+  /* font-size: 18px; */
+  width: 800px;
+}
+
+.activity-detail button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  height: 30px;
+  width: 200px;
+}
