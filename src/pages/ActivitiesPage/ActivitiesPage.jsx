@@ -14,9 +14,6 @@ const ActivitiesPage = () => {
           <p>
             Running is considered a highly beneficial exercise for overall good health. Running is important because it offers a wide range of physical and mental benefits that contribute to a healthier, happier, and more fulfilling life.
           </p>
-          <p>
-            It's important to note that while running offers numerous benefits, it's essential to approach it safely and gradually, especially if you're new to running or have underlying health concerns. Consulting with a healthcare professional before beginning a new exercise program is advisable, especially if you have pre-existing health conditions.
-          </p>
           <div className='btn-getstart'>
             <button>GET START</button>
           </div>
@@ -30,9 +27,6 @@ const ActivitiesPage = () => {
           <h3>Yoga</h3>
           <p>
             Yoga is a holistic system of physical and mental practices that originated in ancient India. It encompasses a wide range of techniques and philosophies aimed at promoting physical health, mental well-being, and spiritual growth.
-          </p>
-          <p>
-            Yoga is a versatile practice that can be tailored to an individual's needs and goals. It is important to approach yoga with respect for its tradition and principles while adapting it to one's own personal journey and preferences.
           </p>
           <div className='btn-getstart'>
             <button>GET START</button>
@@ -48,9 +42,6 @@ const ActivitiesPage = () => {
           <p>
             A "bike," short for "bicycle," is a human-powered, two-wheeled vehicle that is propelled by pedaling. Bicycles have been a popular means of transportation and recreation for many years. 
           </p>
-          <p>
-            In summary, biking is important for health because it offers a wide array of physical and mental health benefits, including improved cardiovascular health, muscle strength, mental well-being, and more.
-          </p>
           <div className='btn-getstart'>
             <button>GET START</button>
           </div>
@@ -65,9 +56,6 @@ const ActivitiesPage = () => {
           <p>
             In the context of health and fitness, "ABS" typically refers to abdominal muscles. These are the muscles located in your abdominal region, commonly known as your "core." They play a significant role in various bodily functions and are important for overall health and well-being.
           </p>
-          <p>
-            Remember that while having strong abdominal muscles is important, overall fitness and health also depend on factors like a balanced diet, cardiovascular fitness, flexibility, and proper rest. A holistic approach to health and fitness is the key to well-being.
-          </p>
           <div className='btn-getstart'>
             <button>GET START</button>
           </div>
@@ -81,9 +69,6 @@ const ActivitiesPage = () => {
           <h3>Weight Training</h3>
           <p>
             Weight training, also known as strength training or resistance training, is a form of exercise that involves lifting weights or using resistance to increase muscle strength, endurance, and size.
-          </p>
-          <p>
-            To reap the benefits of weight training while minimizing the risk of injury, it's crucial to use proper form and technique, gradually increase the weight or resistance you use, and allow adequate rest and recovery between workouts.
           </p>
           <div className='btn-getstart'>
             <button>GET START</button>
