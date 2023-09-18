@@ -15,7 +15,7 @@ const ActivitiesPage = () => {
             Running is considered a highly beneficial exercise for overall good health. Running is important because it offers a wide range of physical and mental benefits that contribute to a healthier, happier, and more fulfilling life.
           </p>
           <div className='btn-getstart'>
-            <button>GET START</button>
+            <a href='/createactivity'><button>GET START</button></a>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@ const ActivitiesPage = () => {
             Yoga is a holistic system of physical and mental practices that originated in ancient India. It encompasses a wide range of techniques and philosophies aimed at promoting physical health, mental well-being, and spiritual growth.
           </p>
           <div className='btn-getstart'>
-            <button>GET START</button>
+            <a href='/createactivity'><button>GET START</button></a>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ const ActivitiesPage = () => {
             A "bike," short for "bicycle," is a human-powered, two-wheeled vehicle that is propelled by pedaling. Bicycles have been a popular means of transportation and recreation for many years. 
           </p>
           <div className='btn-getstart'>
-            <button>GET START</button>
+            <a href='/createactivity'><button>GET START</button></a>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ const ActivitiesPage = () => {
             In the context of health and fitness, "ABS" typically refers to abdominal muscles. These are the muscles located in your abdominal region, commonly known as your "core." They play a significant role in various bodily functions and are important for overall health and well-being.
           </p>
           <div className='btn-getstart'>
-            <button>GET START</button>
+            <a href='/createactivity'><button>GET START</button></a>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ const ActivitiesPage = () => {
             Weight training, also known as strength training or resistance training, is a form of exercise that involves lifting weights or using resistance to increase muscle strength, endurance, and size.
           </p>
           <div className='btn-getstart'>
-            <button>GET START</button>
+            <a href='/createactivity'><button>GET START</button></a>
           </div>
         </div>
       </div>
