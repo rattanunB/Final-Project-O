@@ -15,18 +15,18 @@ const HomeBottom = () => {
                 <button type="button">GET  START</button>
             </div>
             <div class="pic">
-                <img src="/HomebottonPic/Bicycle.png" alt='Bicycle' />;
+                <img src="/HomebottonPic/Bicycle.png" alt='Bicycle' />
             </div>
             
         </div>
-        <div class="div-2">
+        <div class="div-1">
+            <div class="pic">
+                <img src="/HomebottonPic/Yoka.png" alt='Yoka' />
+            </div>
             <div class="paragraph">
                 <h1>Set Goals. Log Workouts. Stay On Track</h1>
                 <p>Easily track your Workouts, set Training Plans, and discover new Workout Routines to crush your goals.</p>
-                <button type="button">JOIN ACTIVITY</button>
-            </div>
-            <div class="pic">
-                <img src="/HomebottonPic/Yoka.png" alt='Yoka' />;
+                <button type="button">SET GOAL</button>
             </div>
         </div>
     </div>
