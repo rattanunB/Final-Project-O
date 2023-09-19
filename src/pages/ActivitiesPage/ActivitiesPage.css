@@ -19,7 +19,7 @@
 }
 
 .activity-detail {
-  width: 45%;
+  width: 55%;
   height: 300px;
   margin-left: 50px;
   display: flex;
@@ -45,7 +45,7 @@
 .activity-detail p {
   font-family: Arial, Helvetica, sans-serif;
   /* font-size: 18px; */
-  width: 840px;
+  width: 95%;
   text-indent: 30px;
   margin: 0;
   padding: 40px 15px;
@@ -75,5 +75,5 @@ button:hover {
 .btn-getstart {
   display: flex;
   justify-content: flex-end;
-  width: 840px;
+  width: 95%;
 }
