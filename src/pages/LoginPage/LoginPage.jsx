@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./LoginPage.scss"
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const LoginPage = () => {
       return (
         <div className="loginPage">
           <h2>Login</h2>
-          <div><span>Don,t have an account?</span><span>Signup</span></div>      
+          <div className='goSignup'><span>Don,t have an account?</span><Link to="/signup" className='goSignupPage'>Signup</Link></div>      
           <form onSubmit={handleSubmit}>
             <div className="loginWrapInput">
               <label>Email</label>
@@ -43,7 +44,7 @@ const LoginPage = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className='activityBtnWrap'>
+            <div className='loginBtnWrap'>
                 <button type="submit">Login</button>
                 <button>Continue With Google</button>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./CreateActivitiyPage.css";
+import "./CreateActivitiyPage.scss";
 import { BiRun } from 'react-icons/bi'
 import { TbYoga } from 'react-icons/tb'
 import { IoMdBicycle } from 'react-icons/io'
