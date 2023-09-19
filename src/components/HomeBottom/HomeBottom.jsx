@@ -8,10 +8,9 @@ const HomeBottom = () => {
     <div id="container">
         <div class="div-1">
             <div class="paragraph">
-                <h1>Set Goals.
-                    Log Workouts.
-                    Stay On Track</h1>
-                <p>Easily track your Workouts, set Training Plans, and discover new Workout Routines to crush your goals.</p>
+                <h1>GET fit, GET strong.
+                    GET healthy</h1>
+                <p>Welcome to our fitness app designed to help you achieve your fitness goal and transform your body and mind.</p>
                 <button type="button">GET  START</button>
             </div>
             <div class="pic">
