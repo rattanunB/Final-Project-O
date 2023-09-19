@@ -1,0 +1,45 @@
+.dashboard-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .top-row {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+    }
+}
+
+
+.create-activity {
+    display: flex;
+    gap: 2rem;
+
+    input {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input:focus {
+        border: 1px solid #555;
+    }
+}
+
+.create-goal {
+    display: flex;
+    gap: 2rem;
+}
+
+.activity-tracking button {
+    color: black;
+}
+
+.create-goal button {
+    color: black;
+}
+
+
+
+
+
