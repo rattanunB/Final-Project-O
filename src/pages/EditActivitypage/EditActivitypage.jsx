@@ -101,7 +101,7 @@ const EditActivitypage = () => {
               <IoMdBicycle/>
             </span>
             <span
-              onClick={() => handleActivityTypeChange('weight training')}
+              onClick={() => handleActivityTypeChange('weight')}
               className={formData.activityType === 'weight' ? 'active' : ''}
             >
               <GiWeightLiftingUp/>
