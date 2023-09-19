@@ -17,6 +17,7 @@ function App() {
       <div className="app">
         <Navbar />
         <Outlet />
+        {/* <ContactPage /> */}
       </div>
     );
   };
