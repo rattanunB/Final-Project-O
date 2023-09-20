@@ -24,19 +24,29 @@
     input:focus {
         border: 1px solid #555;
     }
+    button {
+        color: black;
+    }
 }
 
 .create-goal {
     display: flex;
     gap: 2rem;
+
+    button {
+        color: black;
+    }
 }
 
-.activity-tracking button {
-    color: black;
-}
+.goal-list {
+    button {
+        margin: 10px;
+    }
 
-.create-goal button {
-    color: black;
+    button:hover {
+        background-color: white;
+        color: orange;
+    }
 }
 
 
