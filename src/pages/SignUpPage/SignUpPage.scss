@@ -32,23 +32,27 @@
     padding-left: 15px;
   }
   
+  form {
+    gap: 0;
+  }
+
   .signUp-form {
-    margin: 0 !important;
+    margin: 0;
   }
   
   .signUp-input {
     display: flex;
     flex-direction: column;
     color: rgba(63, 63, 63, 1);
-    margin: 0 !important;
+    margin: 0;
   }
   
   .signUp-input h3 {
-    font-weight: bold;
+    font-weight:bold;
   }
-  
-  form {
-    gap: 0 !important;
+
+  .signUp-input input {
+    height: 45px;
   }
   
   .signUp-gender {
@@ -85,45 +89,48 @@
   .signUp-page-btn {
     display: flex;
     justify-content: space-between;
-    border-radius: 10px;
     width: 520px;
   }
   
   .signUp-page-btn a {
    font-weight: 500px;
+   
   }
   
-  .signUp {
-    color: rgba(236, 120, 84, 1) !important;
+  .signUp {  
+    color: rgba(236, 120, 84, 1);
   }
   
   .signUp button {
-    height: 50px !important;
-    width: 250px !important;
-    background-color: rgba(236, 120, 84, 1) !important;
+    height: 50px;
+    width: 250px;
+    background-color: rgba(236, 120, 84, 1);
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
   }
   
   .signUp-google button {
-    height: 50px !important;
-    width: 250px !important;
-    background-color: rgba(214, 214, 214, 1) !important;
+    height: 50px;
+    width: 250px;
+    background-color: rgba(214, 214, 214, 1);
     color: rgba(0, 0, 0, 0.54);
+    border-radius: 15px;
   }
   
   button {
-    font-weight:bold !important;
-    font-size: 17px !important;
+    font-weight:bold;
+    font-size: 17px;
   }
   
   .signUp button:hover {
-    border: 3px solid rgba(236, 120, 84, 1) !important;
-    background-color: rgb(255, 255, 255) !important;
-    color: rgba(236, 120, 84, 1) !important;
+    border: 3px solid rgba(236, 120, 84, 1);
+    background-color: rgb(255, 255, 255);
+    color: rgba(236, 120, 84, 1);
   }
   
   .signUp-google button:hover {
-    border: 3px solid rgba(0, 0, 0, 0.54) !important;
-    background-color: rgb(255, 255, 255) !important;
-    color: rgba(0, 0, 0, 0.54) !important;
+    border: 3px solid rgba(0, 0, 0, 0.54);
+    background-color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.54);
   }
 }
