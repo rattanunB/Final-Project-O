@@ -9,6 +9,8 @@ import ActivitiesPage from './pages/ActivitiesPage/ActivitiesPage';
 import ContactPage from './pages/ContactPage/ContactPage';
 import EditActivitypage from './pages/EditActivitypage/EditActivitypage';
 import CreateGoalPage from './pages/CreateGoalPage/CreateGoalPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import SignUpPage from './pages/SignUpPage/SignUpPage';
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
       <div className="app">
         <Navbar />
         <Outlet />
+        {/* <ContactPage /> */}
       </div>
     );
   };
@@ -53,6 +56,14 @@ function App() {
         {
           path: "/contact",
           element: <ContactPage />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
+        {
+          path: "/signup",
+          element: <SignUpPage />,
         },
       ],
     },
