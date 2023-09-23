@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./EditActivitypage.css"
+import "./EditActivitypage.scss"
 import { BiRun } from 'react-icons/bi'
 import { TbYoga } from 'react-icons/tb'
 import { IoMdBicycle } from 'react-icons/io'
@@ -101,7 +101,7 @@ const EditActivitypage = () => {
               <IoMdBicycle/>
             </span>
             <span
-              onClick={() => handleActivityTypeChange('weight training')}
+              onClick={() => handleActivityTypeChange('weight')}
               className={formData.activityType === 'weight' ? 'active' : ''}
             >
               <GiWeightLiftingUp/>
