@@ -19,7 +19,7 @@ const Navbar = () => {
         </div>
         <div className="last__nav">
           <a href="#">Log In</a>
-          <a href="#">Sign Up</a>
+          <a href="/signup">Sign Up</a>
         </div>
       </div>
     </>
