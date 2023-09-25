@@ -1,5 +1,5 @@
 import React from 'react'
-import "./ActivitiesPage.scss"
+import "./ActivitiesPage.css"
 
 
 const ActivitiesPage = () => {

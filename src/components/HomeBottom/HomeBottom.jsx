@@ -8,24 +8,25 @@ const HomeBottom = () => {
     <div id="container">
         <div class="div-1">
             <div class="paragraph">
-                <h1>GET fit, GET strong.
-                    GET healthy</h1>
-                <p>Welcome to our fitness app designed to help you achieve your fitness goal and transform your body and mind.</p>
+                <h1>Set Goals.
+                    Log Workouts.
+                    Stay On Track</h1>
+                <p>Easily track your Workouts, set Training Plans, and discover new Workout Routines to crush your goals.</p>
                 <button type="button">GET  START</button>
             </div>
             <div class="pic">
-                <img src="/HomebottonPic/Bicycle.png" alt='Bicycle' />
+                <img src="/HomebottonPic/Bicycle.png" alt='Bicycle' />;
             </div>
             
         </div>
-        <div class="div-1">
-            <div class="pic">
-                <img src="/HomebottonPic/Yoka.png" alt='Yoka' />
-            </div>
+        <div class="div-2">
             <div class="paragraph">
                 <h1>Set Goals. Log Workouts. Stay On Track</h1>
                 <p>Easily track your Workouts, set Training Plans, and discover new Workout Routines to crush your goals.</p>
-                <button type="button">SET GOAL</button>
+                <button type="button">JOIN ACTIVITY</button>
+            </div>
+            <div class="pic">
+                <img src="/HomebottonPic/Yoka.png" alt='Yoka' />;
             </div>
         </div>
     </div>
