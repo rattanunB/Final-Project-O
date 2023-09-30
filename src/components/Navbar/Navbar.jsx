@@ -1,5 +1,5 @@
 import React from "react";
-import "./navbar.css";
+import "./navbar.scss";
 
 const Navbar = () => {
   return (
@@ -12,10 +12,10 @@ const Navbar = () => {
           </p>
         </div>
         <div className="center__nav">
-          <a href="#">Home</a>
+          <a href="/">Home</a>
           <a href="/activities">Activity</a>
-          <a href="#">Dashboard</a>
-          <a href="#">About Us</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/contact">About Us</a>
         </div>
         <div className="last__nav">
           <a href="#">Log In</a>
