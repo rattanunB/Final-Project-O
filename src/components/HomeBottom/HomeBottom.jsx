@@ -1,5 +1,5 @@
 import React from 'react';
-import './HomeBottom.css';
+import './HomeBottom.scss';
 // import bicycle from '/public/HomebottonPic/Bicycle.png';
 // import yoka from '/public/HomebottonPic/Yoka.png';
 const HomeBottom = () => {
