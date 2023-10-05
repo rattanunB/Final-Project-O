@@ -1,131 +1,191 @@
-import React, { useState } from 'react';
-import './DashBoardBottom.scss'
-import {ImClock} from 'react-icons/im'
-import {GiPathDistance} from 'react-icons/gi'
-import {GrTrophy} from 'react-icons/gr'
+import React, { useEffect, useState } from "react";
+import "./DashBoardBottom.scss";
+import { ImClock } from "react-icons/im";
+import { GiPathDistance } from "react-icons/gi";
+import { GoTrophy } from "react-icons/go";
+
+import { BiRun } from "react-icons/bi";
+import { TbYoga } from "react-icons/tb";
+import { IoMdBicycle } from "react-icons/io";
+import { GiWeightLiftingUp } from "react-icons/gi";
 
 function DashBoardBottom() {
   // State for duration, distance, and goal
-  const [duration, setDuration] = useState('0.00');
-  const [distance, setDistance] = useState('0');
-  const [goal, setGoal] = useState('0');
+  const [duration, setDuration] = useState("0.00");
+  const [distance, setDistance] = useState("0");
+  const [goal, setGoal] = useState("0");
+  const [myGoal, setMyGoal] = useState([
+    {
+      id: 1,
+      activityName: "run",
+      deadLine: "2023-10-05",
+      giveUp: false,
+      done: false,
+    },
+    {
+      id: 2,
+      activityName: "bicycle",
+      deadLine: "2023-10-06",
+      giveUp: false,
+      done: false,
+    },
+    {
+      id: 3,
+      activityName: "yoga",
+      deadLine: "2023-10-06",
+      giveUp: false,
+      done: false,
+    },
+  ]);
 
-  // State for activity tracking
-  const [activities, setActivities] = useState([]);
-  const [newActivity, setNewActivity] = useState({ name: '', duration: '', date: '' });
+  const handleDoneClick = (goalId) => {
+    const updatedGoals = myGoal.map((goal) => {
+      if (goal.id === goalId) {
+        console.log(`goal ${goal.id}  สำเร็จ`);
+        return { ...goal, done: true };
+      }
+      return goal;
+    });
 
-  // State for goal tracking
-  const [goals, setGoals] = useState([]);
-  const [newGoal, setNewGoal] = useState({ activityName: '', deadline: '' });
-  const [goalStatus, setGoalStatus] = useState('unset'); // 'unset', 'inProgress', 'done'
-
-  // Function to create a new activity
-  const handleCreateActivity = () => {
-    setActivities([...activities, newActivity]);
-    setNewActivity({ name: '', duration: '', date: '' });
+    setMyGoal(updatedGoals);
   };
 
-  // Function to create a new goal
-  const handleCreateGoal = () => {
-    setGoals([...goals, newGoal]);
-    setNewGoal({ activityName: '', deadline: '' });
+  const handleGiveUpClick = (goalId) => {
+    const updatedGoals = myGoal.map((goal) => {
+      if (goal.id === goalId) {
+        console.log(`goal ${goal.id}  ล้มเหลว`);
+        return { ...goal, giveUp: true };
+      }
+      return goal;
+    });
+
+    setMyGoal(updatedGoals);
   };
 
-  // Function to give up on a goal
-  const handleGiveUp = () => {
-    setGoalStatus('Fail');
-  };
+  let myActivity = [
+    {
+      id: 1,
+      activityName: "run",
+      duration: 30,
+      date: "2023-10-05",
+    },
+    {
+      id: 2,
+      activityName: "bicycle",
+      duration: 45,
+      date: "2023-10-06",
+    },
+    {
+      id: 3,
+      activityName: "yoga",
+      duration: 60,
+      date: "2023-10-07",
+    },
+  ];
 
-  // Function to mark a goal as done
-  const handleDone = () => {
-    setGoalStatus('Success');
-  };
+    // Calculate total duration from myActivity and set it when myActivity changes
+    useEffect(() => {
+      const totalDuration = myActivity.reduce((acc, activity) => acc + activity.duration, 0);
+      setDuration(totalDuration.toFixed(2));
+    }, [myActivity]);
 
   return (
     <div className="dashboard-bottom">
-      {/* Top row: Display duration, distance, and goal */}
       <div className="top-row">
-        <div className="duration">
-          <ImClock />
-          <h3>Duration</h3>
-          <h4>{duration} Hr</h4> 
+        <div className="duration total-status">
+          <div className="icon">
+            <ImClock />
+          </div>
+          <span className="status-title">Duration</span>
+          <span className="status-amount">{duration} Hr</span>
         </div>
-        <div className="distance">
-          <GiPathDistance />
-          <h3>Distance</h3>
-          <h4>{distance}</h4>
+        <div className="distance total-status">
+          <div className="icon">
+            <GiPathDistance />
+          </div>
+          <span className="status-title">Distance</span>
+          <span className="status-amount">{distance}</span>
         </div>
-        <div className="goal">
-          <GrTrophy />
-          <h3>Goal</h3>
-          <h4>{goal}</h4>
-        </div>
-      </div>
-
-      {/* Activity tracking section */}
-      <div className="activity-tracking">
-        <h2>Activity Tracking</h2>
-        <div className="activity-list">
-          {activities.map((activity, index) => (
-            <div key={index} className="activity-card">
-              <div>Activity Name: {activity.name}</div>
-              <div>Duration: {activity.duration}</div>
-              <div>Date: {activity.date}</div>
-            </div>
-          ))}
-        </div>
-        <div className="create-activity">
-          <input
-            type="text"
-            placeholder="Activity Name"
-            value={newActivity.name}
-            onChange={(e) => setNewActivity({ ...newActivity, name: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Duration"
-            value={newActivity.duration}
-            onChange={(e) => setNewActivity({ ...newActivity, duration: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Date"
-            value={newActivity.date}
-            onChange={(e) => setNewActivity({ ...newActivity, date: e.target.value })}
-          />
-          <button onClick={handleCreateActivity}>Create Activity</button>
+        <div className="goal total-status">
+          <div className="icon">
+            <GoTrophy />
+          </div>
+          <span className="status-title">Goal</span>
+          <span className="status-amount">{goal}</span>
         </div>
       </div>
 
-      {/* Goal tracking section */}
-      <div className="goal-tracking">
-        <h2>Goal Tracking</h2>
-        <div className="create-goal">
-          <input
-            type="text"
-            placeholder="Activity Name"
-            value={newGoal.activityName}
-            onChange={(e) => setNewGoal({ ...newGoal, activityName: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Deadline"
-            value={newGoal.deadline}
-            onChange={(e) => setNewGoal({ ...newGoal, deadline: e.target.value })}
-          />
-          <button onClick={handleCreateGoal}>Create Goal</button>
-        </div>
-        <div className="goal-list">
-          {goals.map((goal, index) => (
-            <div key={index} className="goal-card">
-              <div>Activity Name: {goal.activityName}</div>
-              <div>Deadline: {goal.deadline}</div>
-              <div>
-                <button onClick={handleGiveUp}>Give Up</button>
-                <button onClick={handleDone}>Done</button>
+      <div className="bottom-row">
+        {/* Activity tracking section */}
+        <div className="activity-tracking">
+          <span className="activity-head">Activity Tracking</span>
+          <div className="activity-warp">
+            {myActivity.map((activity) => (
+              <div className="activity-card" key={activity.id}>
+                <div className="activity-card-icon">
+                  {activity.activityName === "run" && <BiRun />}
+                  {activity.activityName === "bicycle" && <IoMdBicycle />}
+                  {activity.activityName === "yoga" && <TbYoga />}
+                  {activity.activityName === "weight" && <GiWeightLiftingUp />}
+                </div>
+                <div className="activity-card-detail">
+                  <span>Activity name: {activity.activityName}</span>
+                  <span>Duration: {activity.duration}</span>
+                  <span>Date: {activity.date}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+            <button className="btn-create-activity">Create Activity</button>
+          </div>
+        </div>
+
+        {/* Goal tracking section */}
+        <div className="goal-tracking">
+          <span className="goal-head">Goal Tracking</span>
+          <div className="goal-warp">
+            {myGoal.map((goal) => (
+              <div className="goal-card" key={goal.id}>
+                <div className="goal-card-icon">
+                  {goal.activityName === "run" && <BiRun />}
+                  {goal.activityName === "bicycle" && <IoMdBicycle />}
+                  {goal.activityName === "yoga" && <TbYoga />}
+                  {/* เพิ่มไอคอนสำหรับกิจกรรมอื่น ๆ ตามที่คุณต้องการ */}
+                </div>
+                <div className="goal-card-detail">
+                  <span>Activity name: {goal.activityName}</span>
+                  <span>Deadline: {goal.deadLine}</span>
+
+                  <div className="btn-warp">
+                    {goal.done ? (
+                      <span className="status-success">Success</span>
+                    ) : (
+                      <>
+                        {goal.giveUp ? (
+                          <span className="status-fail">Fail</span>
+                        ) : (
+                          <>
+                            <button
+                              className="btn-giveup"
+                              onClick={() => handleGiveUpClick(goal.id)}
+                            >
+                              Give up
+                            </button>
+                            <button
+                              className="btn-done"
+                              onClick={() => handleDoneClick(goal.id)}
+                            >
+                              Done
+                            </button>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button className="btn-create-activity">Create Goal</button>
+          </div>
         </div>
       </div>
     </div>
@@ -133,4 +193,3 @@ function DashBoardBottom() {
 }
 
 export default DashBoardBottom;
-
