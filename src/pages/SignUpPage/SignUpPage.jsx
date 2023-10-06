@@ -24,6 +24,31 @@ const SignUpPage = () => {
   const [ gender, setGender ] = useState('');
   // console.log('Gender:', gender);
 
+  const [ memberData, setMemberData ] = useState([ 
+    {
+      firstname: "admin",
+      lastname: "admin",
+      email: "admin@gmail.com",
+      password: "1234",
+      birthdate: new Date(),
+      getder: "Male"
+    }
+  ]);
+
+  const handlerSignup = (e) => {
+    e.preventDefault();
+    // console.log(`Complete clicking sign up`)
+    if(!firstname || !lastname || !email || !password || !birthdate || !gender){
+      return alert("Form invalid: Please fill empty form")
+    }
+    if(password !== rePassword){
+      return alert("Passwords did not match, please check password and re-password again")
+    }
+    const data = {firstname, lastname, email, password, birthdate, gender};
+    // console.log(data);
+    setMemberData((prev) => [...prev, data]);
+  }
+  console.log(memberData);
 
   return (
     <div className="signUp-page">
@@ -63,7 +88,7 @@ const SignUpPage = () => {
             </div>
           </div>
           <div className="signUp-page-btn">
-            <a className="signUp"><button>Sign Up</button></a>
+            <a className="signUp"><button onClick={handlerSignup}>Sign Up</button></a>
             <a className="signUp-google"><button><img/>Continue with Google</button></a>
           </div>
         </form>
