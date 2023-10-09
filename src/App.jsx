@@ -16,7 +16,7 @@ import SignUpPage from './pages/SignUpPage/SignUpPage';
 function App() {
   const Layout = () => {
     return (
-      <div className="app">?
+      <div className="app">
         <Navbar />
         <Outlet />
       </div>
