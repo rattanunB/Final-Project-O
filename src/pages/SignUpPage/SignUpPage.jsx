@@ -31,7 +31,7 @@ const SignUpPage = () => {
       email: "admin@gmail.com",
       password: "1234",
       birthdate: new Date(),
-      getder: "Male"
+      gender: "Male"
     }
   ]);
 
@@ -51,17 +51,17 @@ const SignUpPage = () => {
   console.log(memberData);
 
   return (
-    <div className="signUp-page">
-      <div className="signUp-header">
+    <div className="signup-page">
+      <div className="signup-header">
         <h2>Sign Up</h2>
         <p>Already a member?
           <span>
-            <a href="#">Log In</a>
+            <a href="/login">Log In</a>
           </span>
         </p>
       </div>
-      <div className="signUp-form">
-        <form className="signUp-input">
+      <div className="signup-form">
+        <form className="signup-input">
           <h3>First Name</h3>
           <input type="text" placeholder="Enter you first name" onChange={(e) => setFirstname(e.target.value)} />
           <h3>Last Name</h3>
@@ -74,7 +74,7 @@ const SignUpPage = () => {
           <input type="password" placeholder="Enter you password again" onChange={(e) => setRePassword(e.target.value)}/>
           <h3>Birthdate</h3>
           <input type="date" onChange={(e) => setBirthdate(e.target.value)} />
-          <div className="signUp-gender">
+          <div className="signup-gender">
             <h3>Gender</h3>
             <div className="select-gender">
               <div className="gender-male">
@@ -87,9 +87,9 @@ const SignUpPage = () => {
               </div>
             </div>
           </div>
-          <div className="signUp-page-btn">
-            <a className="signUp"><button onClick={handlerSignup}>Sign Up</button></a>
-            <a className="signUp-google"><button><img/>Continue with Google</button></a>
+          <div className="signup-page-btn">
+            <a className="signup" href="/"><button onClick={handlerSignup}>Sign Up</button></a>
+            <a className="cancel" href="/"><button>Cancel</button></a>
           </div>
         </form>
       </div>

@@ -1,4 +1,4 @@
-.signUp-page {
+.signup-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   margin-bottom: 10px;
   font-family: Arial, Helvetica, sans-serif;
 
-  .signUp-header {
+  .signup-header {
     color: rgba(63, 63, 63, 1);
     display: flex;
     flex-direction: column;
@@ -15,20 +15,20 @@
     margin-top: 15px;
   }
   
-  .signUp-header h2 {
-    margin: 5px
+  .signup-header h2 {
+    margin: 5px;
   }
   
-  .signUp-header p {
+  .signup-header p {
     margin: 5;
     font-size: 20px;
   }
   
-  .signUp-header a {
+  .signup-header a {
     color: rgba(236, 120, 84, 1);
   }
   
-  .signUp-header span {
+  .signup-header span {
     padding-left: 15px;
   }
   
@@ -36,26 +36,26 @@
     gap: 0;
   }
 
-  .signUp-form {
+  .signup-form {
     margin: 0;
   }
   
-  .signUp-input {
+  .signup-input {
     display: flex;
     flex-direction: column;
     color: rgba(63, 63, 63, 1);
     margin: 0;
   }
   
-  .signUp-input h3 {
+  .signup-input h3 {
     font-weight:bold;
   }
 
-  .signUp-input input {
+  .signup-input input {
     height: 45px;
   }
   
-  .signUp-gender {
+  .signup-gender {
     color: rgba(63, 63, 63, 1);
   }
   
@@ -86,22 +86,21 @@
     margin-right: 15px;
   }
   
-  .signUp-page-btn {
+  .signup-page-btn {
     display: flex;
     justify-content: space-between;
     width: 520px;
   }
   
-  .signUp-page-btn a {
+  .signup-page-btn a {
    font-weight: 500px;
-   
   }
   
-  .signUp {  
+  .signup {  
     color: rgba(236, 120, 84, 1);
   }
   
-  .signUp button {
+  .signup button {
     height: 50px;
     width: 250px;
     background-color: rgba(236, 120, 84, 1);
@@ -110,7 +109,7 @@
     border: none;
   }
   
-  .signUp-google button {
+  .cancel button {
     height: 50px;
     width: 250px;
     background-color: rgba(214, 214, 214, 1);
@@ -124,13 +123,13 @@
     font-size: 17px;
   }
   
-  .signUp button:hover {
+  .signup button:hover {
     border: 3px solid rgba(236, 120, 84, 1);
     background-color: rgb(255, 255, 255);
     color: rgba(236, 120, 84, 1);
   }
   
-  .signUp-google button:hover {
+  .cancel button:hover {
     border: 3px solid rgba(0, 0, 0, 0.54);
     background-color: rgb(255, 255, 255);
     color: rgba(0, 0, 0, 0.54);
