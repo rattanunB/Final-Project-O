@@ -3,17 +3,19 @@ import "./DashBoardBottom.scss";
 import { ImClock } from "react-icons/im";
 import { GiPathDistance } from "react-icons/gi";
 import { GoTrophy } from "react-icons/go";
-
 import { BiRun } from "react-icons/bi";
 import { TbYoga } from "react-icons/tb";
 import { IoMdBicycle } from "react-icons/io";
 import { GiWeightLiftingUp } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
 function DashBoardBottom() {
   // State for duration, distance, and goal
   const [duration, setDuration] = useState("0.00");
   const [distance, setDistance] = useState("0");
   const [goal, setGoal] = useState("0");
+  const [selectedActivity, setSelectedActivity] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [myGoal, setMyGoal] = useState([
     {
       id: 1,
@@ -66,22 +68,43 @@ function DashBoardBottom() {
     {
       id: 1,
       activityName: "run",
+      activityDesc:"run with dog",
       duration: 30,
+      distance:1500,
       date: "2023-10-05",
     },
     {
       id: 2,
       activityName: "bicycle",
+      activityDesc:"bike with dog",
       duration: 45,
+      distance:2500,
       date: "2023-10-06",
     },
     {
       id: 3,
       activityName: "yoga",
+      activityDesc:"yoga with friend",
       duration: 60,
+      distance:"",
       date: "2023-10-07",
     },
   ];
+
+  const handleActivityClick = (activity) => {
+    setSelectedActivity(activity);
+    setIsModalOpen(true);
+    console.log(isModalOpen)
+  };
+
+  const handleDeleteClick = () => {
+    if (selectedActivity) {
+      const objectId = selectedActivity.id; // ใช้ Object ID จากกิจกรรมที่เลือก
+      // deleteActivity(objectId); // เรียกใช้ฟังก์ชันลบกิจกรรม
+      setIsModalOpen(false); // ปิดโมเดลหลังจากลบ
+      console.log(`Delete OBJ ${objectId}`);
+    }
+  };
 
     // Calculate total duration from myActivity and set it when myActivity changes
     useEffect(() => {
@@ -121,7 +144,7 @@ function DashBoardBottom() {
           <span className="activity-head">Activity Tracking</span>
           <div className="activity-warp">
             {myActivity.map((activity) => (
-              <div className="activity-card" key={activity.id}>
+              <div className="activity-card" key={activity.id} onClick={() => handleActivityClick(activity)}>
                 <div className="activity-card-icon">
                   {activity.activityName === "run" && <BiRun />}
                   {activity.activityName === "bicycle" && <IoMdBicycle />}
@@ -135,7 +158,7 @@ function DashBoardBottom() {
                 </div>
               </div>
             ))}
-            <button className="btn-create-activity">Create Activity</button>
+            <a href="/createactivity" className="btn-create"><span>Create Activity</span></a>
           </div>
         </div>
 
@@ -184,10 +207,45 @@ function DashBoardBottom() {
                 </div>
               </div>
             ))}
-            <button className="btn-create-activity">Create Goal</button>
+            <a href="/creategoal" className="btn-create"><span>Create Goal</span></a>
           </div>
         </div>
+        {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <button
+              className="close-button"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <AiOutlineClose />
+            </button>
+            <div className="modal-detail-box">
+              <span className="modal-detail-title">Activity Name</span>
+              <span className="modal-detail-text">{selectedActivity.activityName}</span>
+            </div>
+            <div className="modal-detail-box">
+              <span className="modal-detail-title">Activity Description</span>
+              <span className="modal-detail-text">{selectedActivity.activityDesc}</span>
+            </div>
+            <div className="modal-detail-box">
+              <span className="modal-detail-title">Duration</span>
+              <span className="modal-detail-text">{selectedActivity.duration}</span>
+            </div>
+            {selectedActivity.distance && (
+          <div className="modal-detail-box">
+            <span className="modal-detail-title">Distance</span>
+            <span className="modal-detail-text">{selectedActivity.distance}</span>
+          </div>
+        )}
+            <div className="action-buttons">
+              <button className="edit-button">Edit</button>
+              <button className="delete-button" onClick={() => handleDeleteClick()}>Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
       </div>
+      
     </div>
   );
 }
