@@ -1,0 +1,76 @@
+.flexbox{
+    display: flex;
+    box-sizing: border-box;
+    margin: 0px -10px;
+
+}
+.item{
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 0px 10px;
+}
+.item-1{
+    width: 33.33%;
+}
+.Name{
+    border: 2px solid #ec7854;
+    border-radius: 20px;
+    width: 50%;
+    margin: 30px;
+    padding:10px;
+    margin-inline-start: 130px;
+    font-size: 28px;
+    
+}
+.item-2{
+    width: 60%;
+}
+.Content{
+    border: 2px solid #ec7854;
+    border-radius: 20px;
+    font-size: 18px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.content-1{
+
+    border-radius: 50%;
+    padding: 1rem;
+    width: 50%;
+    aspect-ratio: 1/1;
+    margin-inline-start: 130px;
+    margin-top: 10px;
+}
+.content-2{
+    margin-top: 20px;
+    margin-inline-start: 100px;
+    padding: 80px;
+    width: 70%;
+}
+.weight{
+    background: #ec7854;
+        width: 20%;
+        padding: 1rem 0;
+        text-align: center;
+        border-radius: 20px;
+        color: white;
+}
+.Height{
+   
+    background: #ec7854;
+    width: 20%;
+    padding: 1rem 0;
+    text-align: center;
+    border-radius: 20px;
+    color: white;  
+}
+.Age{
+    background: #ec7854;
+    width: 20%;
+    padding: 1rem 0;
+    text-align: center;
+    border-radius: 20px;
+    color: white;
+        
+}
