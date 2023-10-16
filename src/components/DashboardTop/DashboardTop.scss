@@ -42,13 +42,29 @@
     margin-inline-start: 130px;
     margin-top: 10px;
 }
+.Data{
+    margin-bottom: 20px;
+    font-size:  1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    position:absolute;
+    padding: 100px;
+    width: 55%;
+}
 .content-2{
+    display: flex;
+    justify-content: center;
+    gap: 7.5rem;
+    position: absolute;
     margin-top: 20px;
     margin-inline-start: 100px;
-    padding: 80px;
-    width: 70%;
+    padding: 100px;
+    width: 55%;
 }
 .weight{
+
+    margin-top: 50px;
     background: #ec7854;
         width: 20%;
         padding: 1rem 0;
@@ -57,7 +73,7 @@
         color: white;
 }
 .Height{
-   
+    margin-top: 50px;
     background: #ec7854;
     width: 20%;
     padding: 1rem 0;
@@ -66,6 +82,7 @@
     color: white;  
 }
 .Age{
+    margin-top: 50px;
     background: #ec7854;
     width: 20%;
     padding: 1rem 0;

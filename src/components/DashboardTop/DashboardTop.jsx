@@ -9,10 +9,16 @@ const DashboardTop = () => {
             <div class="Name">Nuch-cha Boonyato</div>
         </div>
         <div class="item item-2">
-            <div class="Content content-2"></div>
-            <div class="weight">0 cm</div>
-            <div class="Height">0 Kg</div>
-            <div class="Age">0</div>
+           <div class="Data">
+              <div class="Dataweight">Weight</div>
+              <div class="Dataheight">Height</div>
+              <div class="Dataage">Age</div>
+            </div>
+            <div class="Content content-2">
+             <div class="weight">0 cm</div>
+             <div class="Height">0 Kg</div>
+             <div class="Age">0</div>
+            </div>
         </div>
     </div>
 
