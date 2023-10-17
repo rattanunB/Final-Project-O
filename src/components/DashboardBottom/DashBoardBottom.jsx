@@ -8,14 +8,15 @@ import { TbYoga } from "react-icons/tb";
 import { IoMdBicycle } from "react-icons/io";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
 
 function DashBoardBottom() {
-  // State for duration, distance, and goal
   const [duration, setDuration] = useState("0.00");
   const [distance, setDistance] = useState("0");
   const [goal, setGoal] = useState("0");
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updateActivities, setUpdateActivities] = useState(true)
   const [myGoal, setMyGoal] = useState([
     {
       id: 1,
@@ -39,6 +40,25 @@ function DashBoardBottom() {
       done: false,
     },
   ]);
+    const [activities, setActivities] = useState([]);
+
+  useEffect(() => {
+    // สร้างฟังก์ชันเพื่อดึงข้อมูลกิจกรรม
+    const fetchActivities = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/get');
+        if (response.status === 200) {
+          const activitiesData = response.data; // ข้อมูลกิจกรรมทั้งหมด
+          setActivities(activitiesData); // เก็บข้อมูลใน state
+        }
+      } catch (error) {
+        console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
+      }
+    };
+
+    // เรียกใช้งานฟังก์ชันเพื่อดึงข้อมูลเมื่อคอมโพเนนต์ถูกโหลด
+    fetchActivities();
+  }, [updateActivities]);
 
   const handleDoneClick = (goalId) => {
     const updatedGoals = myGoal.map((goal) => {
@@ -64,53 +84,40 @@ function DashBoardBottom() {
     setMyGoal(updatedGoals);
   };
 
-  let myActivity = [
-    {
-      id: 1,
-      activityName: "run",
-      activityDesc:"run with dog",
-      duration: 30,
-      distance:1500,
-      date: "2023-10-05",
-    },
-    {
-      id: 2,
-      activityName: "bicycle",
-      activityDesc:"bike with dog",
-      duration: 45,
-      distance:2500,
-      date: "2023-10-06",
-    },
-    {
-      id: 3,
-      activityName: "yoga",
-      activityDesc:"yoga with friend",
-      duration: 60,
-      distance:"",
-      date: "2023-10-07",
-    },
-  ];
-
   const handleActivityClick = (activity) => {
     setSelectedActivity(activity);
     setIsModalOpen(true);
     console.log(isModalOpen)
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     if (selectedActivity) {
-      const objectId = selectedActivity.id; // ใช้ Object ID จากกิจกรรมที่เลือก
-      // deleteActivity(objectId); // เรียกใช้ฟังก์ชันลบกิจกรรม
+      const objectId = selectedActivity._id;
       setIsModalOpen(false); // ปิดโมเดลหลังจากลบ
       console.log(`Delete OBJ ${objectId}`);
+  
+      try {
+        const response = await axios.delete(`http://localhost:5000/delete/${objectId}`);
+        setUpdateActivities((prevState) => !prevState)
+        if (response.status === 204) {
+          console.log(`Activity with ID ${objectId} deleted successfully`);
+          
+        }
+      } catch (error) {
+        console.error(`Failed to delete activity with ID ${objectId}`, error);
+      }
     }
   };
+  
+  const handleEditClick = () =>{
+    console.log("Clicl Edit!!")
+  }
 
-    // Calculate total duration from myActivity and set it when myActivity changes
+    // Calculate total duration from activities and set it when activities changes
     useEffect(() => {
-      const totalDuration = myActivity.reduce((acc, activity) => acc + activity.duration, 0);
+      const totalDuration = activities.reduce((acc, activity) => acc + activity.duration, 0);
       setDuration(totalDuration.toFixed(2));
-    }, [myActivity]);
+    }, [activities]);
 
   return (
     <div className="dashboard-bottom">
@@ -143,18 +150,18 @@ function DashBoardBottom() {
         <div className="activity-tracking">
           <span className="activity-head">Activity Tracking</span>
           <div className="activity-warp">
-            {myActivity.map((activity) => (
-              <div className="activity-card" key={activity.id} onClick={() => handleActivityClick(activity)}>
+            {activities.map((activity) => (
+              <div className="activity-card" key={activity._id} onClick={() => handleActivityClick(activity)}>
                 <div className="activity-card-icon">
-                  {activity.activityName === "run" && <BiRun />}
-                  {activity.activityName === "bicycle" && <IoMdBicycle />}
-                  {activity.activityName === "yoga" && <TbYoga />}
-                  {activity.activityName === "weight" && <GiWeightLiftingUp />}
+                  {activity.activityType === "run" && <BiRun />}
+                  {activity.activityType === "bicycle" && <IoMdBicycle />}
+                  {activity.activityType === "yoga" && <TbYoga />}
+                  {activity.activityType === "weight" && <GiWeightLiftingUp />}
                 </div>
                 <div className="activity-card-detail">
                   <span>Activity name: {activity.activityName}</span>
                   <span>Duration: {activity.duration}</span>
-                  <span>Date: {activity.date}</span>
+                  <span>Date: {new Date(activity.date).toLocaleDateString("en-US").replace(/\//g, '-')}</span>
                 </div>
               </div>
             ))}
@@ -225,7 +232,7 @@ function DashBoardBottom() {
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Activity Description</span>
-              <span className="modal-detail-text">{selectedActivity.activityDesc}</span>
+              <span className="modal-detail-text">{selectedActivity.activityDescription}</span>
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Duration</span>
@@ -238,7 +245,7 @@ function DashBoardBottom() {
           </div>
         )}
             <div className="action-buttons">
-              <button className="edit-button">Edit</button>
+              <button className="edit-button" onClick={() => handleEditClick()}>Edit</button>
               <button className="delete-button" onClick={() => handleDeleteClick()}>Delete</button>
             </div>
           </div>

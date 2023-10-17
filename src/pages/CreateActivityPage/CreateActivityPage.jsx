@@ -4,14 +4,18 @@ import { BiRun } from 'react-icons/bi'
 import { TbYoga } from 'react-icons/tb'
 import { IoMdBicycle } from 'react-icons/io'
 import { GiWeightLiftingUp } from 'react-icons/gi'
+import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
 
 
 const CreateActivityPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     activityName: '',
     activityDescription: '',
     duration: '',
-    date: '',
+    date: new Date().toISOString().split('T')[0],
     activityType: 'run'
   });
 
@@ -23,10 +27,31 @@ const CreateActivityPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('ส่งข้อมูลฟอร์ม:', formData);
+     
+    try {
+      const response = await axios.post('http://localhost:5000/save', formData);
+      if (response.status === 201) {
+        console.log('Activity saved successfully');
+        console.log('ข้อมูลที่ถูกส่งไป:', formData);
+
+        setFormData({
+          activityName: '',
+          activityDescription: '',
+          duration: '',
+          date: new Date().toISOString().split('T')[0],
+          activityType: 'run'
+        });
+        navigate('/dashboard')
+      }
+    } catch (error) {
+      console.error('Failed to save activity', error);
+    }
   };
+  
 
   const handleCancel = () => {
     console.log("cancle")
