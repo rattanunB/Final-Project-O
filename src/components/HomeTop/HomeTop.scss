@@ -1,0 +1,68 @@
+.first-top {
+  background-color: #ffffff;
+  background-image: url('https://cdn.pixabay.com/photo/2021/05/14/08/44/running-6252827_1280.jpg');
+  background-position: 0px -500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 100px 30px;
+}
+.Hometop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+}
+.Hometop h1 {
+  font-size: 2vw;
+  font-weight: 500;
+  color: #4A4A4A;
+  margin-inline-start: 50px;
+ 
+}
+
+.Hometop p1 {
+  font-size: 1.3vw;
+  font-weight: 500;
+  color: #4A4A4A;
+  margin-inline-start: 50px;
+  
+}
+.Hometop p3 {
+  font-size: 1.3vw;
+  font-weight: 500;
+  color: #4A4A4A;
+  margin-inline-start: 50px;
+  padding-bottom: 30px;
+  
+  
+  
+}
+
+.Hometop button {
+  width: 30vw;
+  padding: 1rem 0;
+  background-color: #110c0c;
+  border: 0;
+  margin-inline-start: 50px;
+}
+
+.Hometop button:hover {
+  background-color: #7D7D7D;
+}
+
+.Hometop button a {
+  display: inline-block;
+  color: #FFF;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 400;
+  width: 30vw;
+}
+.Hometop p2 {
+  font-size: 1.3vw;
+  font-weight: 500;
+  color: #4A4A4A;
+  padding-inline-start: 150px;
+  padding-top:20px;
+  
+}
