@@ -18,7 +18,7 @@ const Navbar = () => {
           <a href="/contact">About Us</a>
         </div>
         <div className="last__nav">
-          <a href="#">Log In</a>
+          <a href="/login">Log In</a>
           <a href="/signup">Sign Up</a>
         </div>
       </div>
