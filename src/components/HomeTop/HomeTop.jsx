@@ -4,7 +4,7 @@ import './HomeTop.scss';
 const HomeTop = () => {
   return (
     <section role="Hometop" class="first-top">
-    <div className="Hometop">
+    <div class="Hometop">
       <h1>REACH YOUR BEST ACTIVITY</h1>
       <p1>Stay motivated and on track with our powerful exercise tracker</p1> 
             <p3>and access to helpful health content.</p3>
