@@ -3,21 +3,22 @@ import './HomeTop.scss';
 
 const HomeTop = () => {
   return (
-    <section role="Hometop" class="first-top">
-    <div class="Hometop">
-      <h1>REACH YOUR BEST ACTIVITY</h1>
-      <p1>Stay motivated and on track with our powerful exercise tracker</p1> 
-            <p3>and access to helpful health content.</p3>
-      
+    <section role="Hometop" className='first-top'>
+      <div className='Hometop'>
+        <h1>REACH YOUR BEST ACTIVITY</h1>
+        
+      </div>
+      <div className='Hometopdown'>
+      <h2>Stay motivated and on track with our powerful exercise tracker<br/>and access to helpful health content.</h2> 
       <button><a href="/signup">SIGN UP </a></button>
-      <p2>Already member? 
-        <span>
-          <a href="/login">Log In</a>
-        </span>
-        </p2>
-    </div>
-      <div class="Hometop2">
-    </div>
+       <p>Already member?<a  href="/login">Log In</a> </p> 
+        
+        
+  
+        </div>
+      
+  
+      
     </section>
   )
 }
