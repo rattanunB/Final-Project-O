@@ -1,7 +1,15 @@
 import React from "react";
 import "./navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({auth}) => {
+  console.log('setAuth111',auth)
+  const accessToken = localStorage.getItem('accessToken')
+  console.log(accessToken);
+
+  const clearToken = () => {
+    localStorage.removeItem('accessToken')
+  }
+
   return (
     <>
       <div className="container">
@@ -18,8 +26,14 @@ const Navbar = () => {
           <a href="/contact">About Us</a>
         </div>
         <div className="last__nav">
-          <a href="/login">Log In</a>
-          <a href="/signup">Sign Up</a>
+          {
+            auth ? <a href="/" onClick={clearToken}>Log out</a>
+            :
+            <>
+              <a href="/login">Log In</a>
+              <a href="/signup">Sign Up</a>
+            </> 
+          } 
         </div>
       </div>
     </>

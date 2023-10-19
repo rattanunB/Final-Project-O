@@ -1,5 +1,7 @@
 import "./SignUpPage.scss";
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 const SignUpPage = () => {
 
@@ -23,32 +25,26 @@ const SignUpPage = () => {
 
   const [ gender, setGender ] = useState('');
   // console.log('Gender:', gender);
-
-  const [ memberData, setMemberData ] = useState([ 
-    {
-      firstname: "admin",
-      lastname: "admin",
-      email: "admin@gmail.com",
-      password: "1234",
-      birthdate: new Date(),
-      gender: "Male"
-    }
-  ]);
-
-  const handlerSignup = (e) => {
+  const navigate = useNavigate()
+  const handlerSignup = async (e) => {
     e.preventDefault();
-    // console.log(`Complete clicking sign up`)
-    if(!firstname || !lastname || !email || !password || !birthdate || !gender){
+    if(!firstname || !lastname || !email || !password || !rePassword || !birthdate || !gender){
       return alert("Form invalid: Please fill empty form")
     }
     if(password !== rePassword){
       return alert("Passwords did not match, please check password and re-password again")
     }
-    const data = {firstname, lastname, email, password, birthdate, gender};
+    const data = {firstname, lastname, email, password, rePassword, birthdate, gender};
     // console.log(data);
-    setMemberData((prev) => [...prev, data]);
+    await axios.post('http://localhost:8100/signup', data)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    navigate('/login')
   }
-  console.log(memberData);
 
   return (
     <div className="signup-page">

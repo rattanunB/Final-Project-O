@@ -11,13 +11,16 @@ import EditActivitypage from './pages/EditActivitypage/EditActivitypage';
 import CreateGoalPage from './pages/CreateGoalPage/CreateGoalPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
-
+import React, { useState } from 'react';
 
 function App() {
+
+  const [auth, setAuth] = useState(localStorage.getItem('accessToken') ? true : false)
+  console.log('auth..',auth)
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar />
+        <Navbar auth={auth}/>
         <Outlet />
       </div>
     );
@@ -58,7 +61,7 @@ function App() {
         },
         {
           path: "/login",
-          element: <LoginPage />,
+          element: <LoginPage setAuth={setAuth}/>,
         },
         {
           path: "/signup",
