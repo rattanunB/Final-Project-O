@@ -2,10 +2,10 @@ import React from 'react'
 import HomeBottom from '../../components/HomeBottom/HomeBottom'
 import HomeTop from '../../components/HomeTop/HomeTop'
 
-const HomePage = () => {
+const HomePage = ({auth}) => {
   return (
     <div>
-        <HomeTop/>
+        <HomeTop auth={auth}/>
         <HomeBottom/>
     </div>
   )
