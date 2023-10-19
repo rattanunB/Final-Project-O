@@ -58,7 +58,6 @@ const LoginPage = ({setAuth}) => {
         </div>
         <div className='loginBtnWrap'>
             <button type="submit">Login</button>
-            <button>Continue With Google</button>
         </div>
 
       </form>

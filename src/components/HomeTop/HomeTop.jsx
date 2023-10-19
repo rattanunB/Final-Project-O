@@ -15,11 +15,11 @@ const HomeTop = ({auth}) => {
         and access to helpful health content.
         </h2>
         {
-          auth ? <button><a href="/activity">Let's Start</a></button>
+          auth ? <button><a href="/activities">Let's Start</a></button>
           : 
           <>
             <button><a href="/signup">SIGN UP </a></button>
-            <p>Already member?<a href="/login">Log In</a></p>
+            <p>Already member? <a href="/login">Log In</a></p>
           </>
         }
       </div>

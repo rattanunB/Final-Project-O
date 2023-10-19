@@ -28,7 +28,6 @@
       input {
         height: 40px;
         border: solid 1px lightgray;
-        border-radius: 20px;
       }
     }
 
@@ -36,11 +35,15 @@
       display: flex;
       justify-content: center;
       margin-top: 3rem;
+      
 
       button {
-        width: 300px;
+        width: 600px;
         height: 70px;
         border-radius: 20px;
+        border: solid 0px #ec7854;
+        font-size: 20px;
+        font-weight: bold;
 
         &:nth-child(1) {
           background-color: #ec7854;
