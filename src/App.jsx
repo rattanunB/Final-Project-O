@@ -20,7 +20,7 @@ function App() {
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar auth={auth}/>
+        <Navbar auth={auth} setAuth={setAuth}/>
         <Outlet />
       </div>
     );
@@ -33,7 +33,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <HomePage />,
+          element: <HomePage auth={auth}/>,
         },
         {
           path: "/createactivity",

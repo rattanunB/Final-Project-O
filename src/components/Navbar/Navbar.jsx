@@ -1,13 +1,14 @@
 import React from "react";
 import "./navbar.scss";
 
-const Navbar = ({auth}) => {
-  console.log('setAuth111',auth)
+const Navbar = ({auth,setAuth}) => {
+  // console.log('Auth.....',auth)
   const accessToken = localStorage.getItem('accessToken')
   console.log(accessToken);
 
   const clearToken = () => {
     localStorage.removeItem('accessToken')
+    setAuth(false)
   }
 
   return (
@@ -22,7 +23,10 @@ const Navbar = ({auth}) => {
         <div className="center__nav">
           <a href="/">Home</a>
           <a href="/activities">Activity</a>
-          <a href="/dashboard">Dashboard</a>
+          {
+            auth ? <a href="/dashboard">Dashboard</a>
+            : null
+          }
           <a href="/contact">About Us</a>
         </div>
         <div className="last__nav">
