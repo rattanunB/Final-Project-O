@@ -2,7 +2,6 @@ import React from "react";
 import "./navbar.scss";
 
 const Navbar = ({auth,setAuth}) => {
-  // console.log('Auth.....',auth)
   const accessToken = localStorage.getItem('accessToken')
   console.log(accessToken);
 

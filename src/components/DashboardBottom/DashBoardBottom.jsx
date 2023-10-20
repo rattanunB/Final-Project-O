@@ -46,7 +46,14 @@ function DashBoardBottom() {
     // สร้างฟังก์ชันเพื่อดึงข้อมูลกิจกรรม
     const fetchActivities = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/get');
+        const accessToken = localStorage.getItem('accessToken')
+        const option = {
+          headers: {
+            authorization: `Bearer ${accessToken}`
+          }
+        }
+        const response = await axios.get('http://localhost:8100/activity',option);
+        console.log('response..', response)
         if (response.status === 200) {
           const activitiesData = response.data; // ข้อมูลกิจกรรมทั้งหมด
           setActivities(activitiesData); // เก็บข้อมูลใน state
@@ -91,17 +98,22 @@ function DashBoardBottom() {
   };
 
   const handleDeleteClick = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken)
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
     if (selectedActivity) {
       const objectId = selectedActivity._id;
       setIsModalOpen(false); // ปิดโมเดลหลังจากลบ
       console.log(`Delete OBJ ${objectId}`);
-  
       try {
-        const response = await axios.delete(`http://localhost:5000/delete/${objectId}`);
+        const response = await axios.delete(`http://localhost:8100/activity/${objectId}`, option);
         setUpdateActivities((prevState) => !prevState)
-        if (response.status === 204) {
+        if (response.status === 200) {
           console.log(`Activity with ID ${objectId} deleted successfully`);
-          
         }
       } catch (error) {
         console.error(`Failed to delete activity with ID ${objectId}`, error);
@@ -157,6 +169,7 @@ function DashBoardBottom() {
                   {activity.activityType === "bicycle" && <IoMdBicycle />}
                   {activity.activityType === "yoga" && <TbYoga />}
                   {activity.activityType === "weight" && <GiWeightLiftingUp />}
+                  {activity.activityType === 'abs' && <div style={{fontSize:"24px", fontWeight:"bold"}}>ABS</div>}
                 </div>
                 <div className="activity-card-detail">
                   <span>Activity name: {activity.activityName}</span>

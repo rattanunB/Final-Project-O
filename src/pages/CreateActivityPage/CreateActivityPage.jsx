@@ -5,9 +5,7 @@ import { TbYoga } from 'react-icons/tb'
 import { IoMdBicycle } from 'react-icons/io'
 import { GiWeightLiftingUp } from 'react-icons/gi'
 import { useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
-
 
 const CreateActivityPage = () => {
   const navigate = useNavigate();
@@ -15,9 +13,11 @@ const CreateActivityPage = () => {
     activityName: '',
     activityDescription: '',
     duration: '',
+    distance: '',
     date: new Date().toISOString().split('T')[0],
     activityType: 'run'
   });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,14 +27,19 @@ const CreateActivityPage = () => {
     });
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-     
+    const accessToken = localStorage.getItem('accessToken')
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    console.log('formData..',formData)
     try {
-      const response = await axios.post('http://localhost:5000/save', formData);
-      if (response.status === 201) {
+      const response = await axios.post('http://localhost:8100/activity', formData, option);
+      console.log('response..',response)
+      if (response.status === 200) {
         console.log('Activity saved successfully');
         console.log('ข้อมูลที่ถูกส่งไป:', formData);
 
@@ -42,6 +47,7 @@ const CreateActivityPage = () => {
           activityName: '',
           activityDescription: '',
           duration: '',
+          distance: '',
           date: new Date().toISOString().split('T')[0],
           activityType: 'run'
         });
@@ -52,7 +58,6 @@ const CreateActivityPage = () => {
     }
   };
   
-
   const handleCancel = () => {
     console.log("cancle")
   };
@@ -125,6 +130,16 @@ const CreateActivityPage = () => {
             type="number"
             name="duration"
             value={formData.duration}
+            onChange={handleChange}
+            className='ActivityInput'
+          />
+        </div>
+        <div className='ActivityWrapInput'>
+          <label>Distance (Meter)</label>
+          <input
+            type="number"
+            name="distance"
+            value={formData.distance}
             onChange={handleChange}
             className='ActivityInput'
           />

@@ -3,31 +3,49 @@ import { BiRun } from 'react-icons/bi'
 import { TbYoga } from 'react-icons/tb'
 import { IoMdBicycle } from 'react-icons/io'
 import { GiWeightLiftingUp } from 'react-icons/gi'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreateGoalPage = () => {
   const [formData, setFormData] = useState({
     activityName: '',
-    activityDescription: '',
     duration: '',
-    date: '',
+    distance: '',
+    deadline: new Date(),
     activityType: 'run'
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // console.log("Name-Value", name, value)
     setFormData({
       ...formData,
       [name]: value
     });
   };
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('ส่งข้อมูลฟอร์ม:', formData);
+
+    const accessToken = localStorage.getItem('accessToken')
+    // console.log(accessToken);
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    const res = await axios.post('http://localhost:8100/goal', formData, option);
+    console.log('Response....', res)
+    console.log('Send Data...', formData)
+    console.log('ส่งข้อมูลฟอร์ม:', formData)
+    navigate('/dashboard')
   };
 
   const handleCancel = () => {
     console.log("cancle")
+    navigate('/dashboard')
   };
 
   const handleActivityTypeChange = (type) => {
@@ -61,7 +79,7 @@ const CreateGoalPage = () => {
             <IoMdBicycle/>
           </span>
           <span
-            onClick={() => handleActivityTypeChange('weight training')}
+            onClick={() => handleActivityTypeChange('weight')}
             className={formData.activityType === 'weight' ? 'active' : ''}
           >
             <GiWeightLiftingUp/>
@@ -85,9 +103,10 @@ const CreateGoalPage = () => {
       </div>
       <div className='ActivityWrapInput'>
         <label>Duration (Minute)</label>
-        <textarea
+        <input
+          type='number'
           name="duration"
-          value={formData.activityDescription}
+          value={formData.duration}
           onChange={handleChange}
           className='DurationInput'
         />
@@ -97,7 +116,7 @@ const CreateGoalPage = () => {
         <input
           type="number"
           name="distance"
-          value={formData.duration}
+          value={formData.distance}
           onChange={handleChange}
           className='ActivityInput'
         />
@@ -107,7 +126,7 @@ const CreateGoalPage = () => {
         <input
           type="date"
           name="deadline"
-          value={formData.date}
+          value={formData.deadline}
           onChange={handleChange}
           className='ActivityInput'
         />
@@ -118,8 +137,7 @@ const CreateGoalPage = () => {
       </div>
     </form>
   </div>
-);
-  
+); 
 }
 
 export default CreateGoalPage

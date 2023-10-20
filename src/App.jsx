@@ -16,7 +16,7 @@ import React, { useState } from 'react';
 function App() {
 
   const [auth, setAuth] = useState(localStorage.getItem('accessToken') ? true : false)
-  console.log('auth..',auth)
+  // console.log('auth..',auth)
   const Layout = () => {
     return (
       <div className="app">
