@@ -6,7 +6,7 @@ const HomePage = ({auth}) => {
   return (
     <div>
         <HomeTop auth={auth}/>
-        <HomeBottom/>
+        <HomeBottom auth={auth}/>
     </div>
   )
 }

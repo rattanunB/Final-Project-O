@@ -2,7 +2,6 @@ import React from "react";
 import "./navbar.scss";
 
 const Navbar = ({auth,setAuth}) => {
-  // console.log('Auth.....',auth)
   const accessToken = localStorage.getItem('accessToken')
   console.log(accessToken);
 
@@ -15,14 +14,21 @@ const Navbar = ({auth,setAuth}) => {
     <>
       <div className="container">
         <div className="logo">
-          <p>
-            <span className="fit">Fit</span>
-            <span className="hub">Hub</span>
-          </p>
+          <a href="/">
+            <p>
+              <span className="fit">Fit</span>
+              <span className="hub">Hub</span>
+            </p>
+          </a>
         </div>
         <div className="center__nav">
           <a href="/">Home</a>
-          <a href="/activities">Activity</a>
+          {
+            auth ? <a href="/activities">Activity</a>
+            :
+            <a href="/login">Activity</a>
+          }
+          
           {
             auth ? <a href="/dashboard">Dashboard</a>
             : null
