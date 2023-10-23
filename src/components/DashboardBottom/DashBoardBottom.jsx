@@ -11,90 +11,93 @@ import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 
 function DashBoardBottom() {
-  const [duration, setDuration] = useState("0.00");
+  const [hours, setHours] = useState("0");
+  const [minutes, setMinutes] = useState("0");
   const [distance, setDistance] = useState("0");
   const [goal, setGoal] = useState("0");
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateActivities, setUpdateActivities] = useState(true)
-  const [myGoal, setMyGoal] = useState([
-    {
-      id: 1,
-      activityName: "run",
-      deadLine: "2023-10-05",
-      giveUp: false,
-      done: false,
-    },
-    {
-      id: 2,
-      activityName: "bicycle",
-      deadLine: "2023-10-06",
-      giveUp: false,
-      done: false,
-    },
-    {
-      id: 3,
-      activityName: "yoga",
-      deadLine: "2023-10-06",
-      giveUp: false,
-      done: false,
-    },
-  ]);
-    const [activities, setActivities] = useState([]);
+  const [myGoal, setMyGoal] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [activitiesChanged, setActivitiesChanged] = useState(false);
+  const [myGoalChanged, setMyGoalChanged] = useState(false);
+  const [timeChanged, setTimeChanged] = useState(false)
 
-  useEffect(() => {
-    // สร้างฟังก์ชันเพื่อดึงข้อมูลกิจกรรม
-    const fetchActivities = async () => {
-      try {
-        const accessToken = localStorage.getItem('accessToken')
-        const option = {
-          headers: {
-            authorization: `Bearer ${accessToken}`
-          }
+  // สร้างฟังก์ชันเพื่อดึงข้อมูลกิจกรรม
+  const fetchActivities = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken')
+      const option = {
+        headers: {
+          authorization: `Bearer ${accessToken}`
         }
-        const response = await axios.get('http://localhost:8100/activity',option);
-        console.log('response..', response)
-        if (response.status === 200) {
-          const activitiesData = response.data; // ข้อมูลกิจกรรมทั้งหมด
-          setActivities(activitiesData); // เก็บข้อมูลใน state
-        }
-      } catch (error) {
-        console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
       }
-    };
+      const response = await axios.get('http://localhost:8100/activity',option);
+      if (response.status === 200) {
+        const activitiesData = response.data; // ข้อมูลกิจกรรมทั้งหมด
+        setActivities(activitiesData); // เก็บข้อมูลใน state
+        setActivitiesChanged(true); // ตั้งค่าให้มีการเปลี่ยนแปลงใน activities
 
-    // เรียกใช้งานฟังก์ชันเพื่อดึงข้อมูลเมื่อคอมโพเนนต์ถูกโหลด
-    fetchActivities();
-  }, [updateActivities]);
-
-  const handleDoneClick = (goalId) => {
-    const updatedGoals = myGoal.map((goal) => {
-      if (goal.id === goalId) {
-        console.log(`goal ${goal.id}  สำเร็จ`);
-        return { ...goal, done: true };
       }
-      return goal;
-    });
-
-    setMyGoal(updatedGoals);
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
+    }
   };
 
-  const handleGiveUpClick = (goalId) => {
-    const updatedGoals = myGoal.map((goal) => {
-      if (goal.id === goalId) {
-        console.log(`goal ${goal.id}  ล้มเหลว`);
-        return { ...goal, giveUp: true };
+  // Create function to get goal data
+  const fetchGoals = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken')
+      const option = {
+        headers: {
+          authorization: `Bearer ${accessToken}`
+        }
       }
-      return goal;
-    });
+      const response = await axios.get('http://localhost:8100/goal',option);
+      if (response.status === 200) {
+        const goalsData = response.data; // ข้อมูลกิจกรรมทั้งหมด
+        setMyGoal(goalsData); // เก็บข้อมูลใน state
+        setMyGoalChanged(true); // ตั้งค่าให้มีการเปลี่ยนแปลงใน myGoal
 
-    setMyGoal(updatedGoals);
+      }
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการดึงข้อมูล Goals', error);
+    }
+  }
+
+  useEffect(() => {
+    // เรียกใช้งานฟังก์ชันเพื่อดึงข้อมูลเมื่อคอมโพเนนต์ถูกโหลด
+    fetchActivities();
+    fetchGoals();
+  }, [activitiesChanged, myGoalChanged]);
+
+  const updateStatus = async (goalItem) => {
+    const accessToken = localStorage.getItem('accessToken')
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    const res = await axios.put(`http://localhost:8100/goal/${goalItem._id}`, goalItem, option)
+    fetchGoals();
+    setTimeChanged(true);
+  }
+
+  const handleDoneClick = (goal) => {
+    goal.status = 'true'
+    updateStatus(goal)
+  };
+
+  const handleGiveUpClick = (goal) => {
+    goal.status = 'false'
+    console.log(goal)
+    updateStatus(goal)
   };
 
   const handleActivityClick = (activity) => {
     setSelectedActivity(activity);
     setIsModalOpen(true);
-    console.log(isModalOpen)
   };
 
   const handleDeleteClick = async () => {
@@ -125,11 +128,40 @@ function DashBoardBottom() {
     console.log("Clicl Edit!!")
   }
 
-    // Calculate total duration from activities and set it when activities changes
-    useEffect(() => {
-      const totalDuration = activities.reduce((acc, activity) => acc + activity.duration, 0);
-      setDuration(totalDuration.toFixed(2));
-    }, [activities]);
+  const calculateTime = () => {
+    let activityDuration = activities.reduce((acc, activity) => acc + (activity.duration), 0);
+    // console.log(activityDuration)
+    const findGoalSuccess = myGoal.filter((item) => item.status === 'true');
+    let goalDuration = findGoalSuccess.reduce((acc, item) => acc + (item.duration), 0);
+    let sumDuration = activityDuration + goalDuration;
+    let hours = Math.floor(sumDuration / 60);
+    let mins = sumDuration - (hours * 60);
+    setHours(hours);
+    setMinutes(mins);
+  }
+
+  const calculateDistance = () => {
+    let activityDistance = activities.reduce((acc, activity) => acc + (activity.distance), 0);
+    const findGoalSuccess = myGoal.filter((item) => item.status === 'true');
+    let goalDistance = findGoalSuccess.reduce((acc, item) => acc + (item.distance), 0);
+    let sumDistance = (activityDistance + goalDistance)/1000;
+    setDistance(sumDistance);
+  }
+
+  const calculateGoalSuccess = () => {
+    const findGoalSuccess = myGoal.filter((item) => item.status === 'true');
+    const sumGoalSuccess = findGoalSuccess.length
+    setGoal(sumGoalSuccess)
+  }
+
+  // Calculate total duration from activities and set it when activities changes
+  useEffect(() => {
+    if (activitiesChanged || myGoalChanged) {
+      calculateTime();
+      calculateDistance();
+      calculateGoalSuccess();
+    }
+  }, [activitiesChanged, myGoalChanged, timeChanged]);
 
   return (
     <div className="dashboard-bottom">
@@ -139,14 +171,14 @@ function DashBoardBottom() {
             <ImClock />
           </div>
           <span className="status-title">Duration</span>
-          <span className="status-amount">{duration} Hr</span>
+          <span className="status-amount">{hours} Hr {minutes} Min</span>
         </div>
         <div className="distance total-status">
           <div className="icon">
             <GiPathDistance />
           </div>
           <span className="status-title">Distance</span>
-          <span className="status-amount">{distance}</span>
+          <span className="status-amount">{distance} Km</span>
         </div>
         <div className="goal total-status">
           <div className="icon">
@@ -156,7 +188,6 @@ function DashBoardBottom() {
           <span className="status-amount">{goal}</span>
         </div>
       </div>
-
       <div className="bottom-row">
         {/* Activity tracking section */}
         <div className="activity-tracking">
@@ -185,37 +216,38 @@ function DashBoardBottom() {
         {/* Goal tracking section */}
         <div className="goal-tracking">
           <span className="goal-head">Goal Tracking</span>
-          <div className="goal-warp">
+          <div className="goal-warp" >
             {myGoal.map((goal) => (
-              <div className="goal-card" key={goal.id}>
+              <div className="goal-card" key={goal._id}>
                 <div className="goal-card-icon">
-                  {goal.activityName === "run" && <BiRun />}
-                  {goal.activityName === "bicycle" && <IoMdBicycle />}
-                  {goal.activityName === "yoga" && <TbYoga />}
-                  {/* เพิ่มไอคอนสำหรับกิจกรรมอื่น ๆ ตามที่คุณต้องการ */}
+                  {goal.activityType === "run" && <BiRun />}
+                  {goal.activityType === "bicycle" && <IoMdBicycle />}
+                  {goal.activityType === "yoga" && <TbYoga />}
+                  {goal.activityType === 'abs' && <div style={{fontSize:"24px", fontWeight:"bold"}}>ABS</div>}
+                  {goal.activityType === "weight" && <GiWeightLiftingUp />}
                 </div>
                 <div className="goal-card-detail">
                   <span>Activity name: {goal.activityName}</span>
-                  <span>Deadline: {goal.deadLine}</span>
+                  <span>Deadline: {new Date(goal.deadline).toLocaleDateString("en-US").replace(/\//g, '-')}</span>
 
-                  <div className="btn-warp">
-                    {goal.done ? (
+                  {/* <div className="btn-warp">
+                    {goal.status === 'true' ? (
                       <span className="status-success">Success</span>
                     ) : (
                       <>
-                        {goal.giveUp ? (
+                        {goal.status === 'false'? (
                           <span className="status-fail">Fail</span>
                         ) : (
                           <>
                             <button
                               className="btn-giveup"
-                              onClick={() => handleGiveUpClick(goal.id)}
+                              onClick={() => handleGiveUpClick(goal)}
                             >
                               Give up
                             </button>
                             <button
                               className="btn-done"
-                              onClick={() => handleDoneClick(goal.id)}
+                              onClick={() => handleDoneClick(goal)}
                             >
                               Done
                             </button>
@@ -223,6 +255,33 @@ function DashBoardBottom() {
                         )}
                       </>
                     )}
+                  </div> */}
+                  <div className="btn-warp">
+                    {
+                      goal.status === 'null' ? 
+                      <>
+                        <button
+                          className="btn-giveup"
+                          onClick={() => handleGiveUpClick(goal)}
+                        >
+                          Give up
+                        </button>
+                        <button
+                          className="btn-done"
+                          onClick={() => handleDoneClick(goal)}
+                        >
+                          Done
+                        </button>
+                      </> : null
+                    }
+                    {
+                      goal.status === 'true' ? 
+                      <span className="status-success">Success</span> : null
+                    }
+                    {
+                      goal.status === 'false' ?
+                      <span className="status-fail">Fail</span> : null
+                    }
                   </div>
                 </div>
               </div>

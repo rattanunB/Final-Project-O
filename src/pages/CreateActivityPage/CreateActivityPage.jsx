@@ -14,7 +14,7 @@ const CreateActivityPage = () => {
     activityDescription: '',
     duration: '',
     distance: '',
-    date: new Date().toISOString().split('T')[0],
+    date: '', // Should be empty String because this field is require form, if user doesn't fill it, the form can create bc the new Date() will provide the current day to form
     activityType: 'run'
   });
 
@@ -35,14 +35,12 @@ const CreateActivityPage = () => {
         authorization: `Bearer ${accessToken}`
       }
     }
-    console.log('formData..',formData)
+    // console.log('formData..',formData)
     try {
       const response = await axios.post('http://localhost:8100/activity', formData, option);
-      console.log('response..',response)
+      // console.log('response..',response)
       if (response.status === 200) {
-        console.log('Activity saved successfully');
-        console.log('ข้อมูลที่ถูกส่งไป:', formData);
-
+        // console.log('Activity saved successfully', formData);
         setFormData({
           activityName: '',
           activityDescription: '',
@@ -59,7 +57,8 @@ const CreateActivityPage = () => {
   };
   
   const handleCancel = () => {
-    console.log("cancle")
+    // console.log("cancle")
+    navigate('/dashboard')
   };
 
   const handleActivityTypeChange = (type) => {
@@ -136,13 +135,21 @@ const CreateActivityPage = () => {
         </div>
         <div className='ActivityWrapInput'>
           <label>Distance (Meter)</label>
-          <input
+          {
+            formData.activityType === 'run' || formData.activityType === 'bicycle'?
+            <input
             type="number"
             name="distance"
             value={formData.distance}
             onChange={handleChange}
             className='ActivityInput'
-          />
+            /> :
+            <input
+            disabled
+            value={formData.distance}
+            className='ActivityInput'
+            />
+          }
         </div>
         <div className='ActivityWrapInput'>
           <label>Date</label>

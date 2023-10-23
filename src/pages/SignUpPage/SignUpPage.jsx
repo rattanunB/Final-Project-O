@@ -6,35 +6,26 @@ import { useNavigate } from 'react-router-dom'
 const SignUpPage = () => {
 
   const [ firstname, setFirstname ] = useState('');
-  // console.log('Firstnmae:', firstname);
-
   const [ lastname, setLastname ] = useState('');
-  // console.log('Lastname:',lastname);
-
   const [ email, setEmail ] = useState('');
-  // console.log('E-mail:',email);
-
   const [ password, setPassword ] = useState('');
-  // console.log('Password:', password);
-
   const [ rePassword, setRePassword ] = useState('');
-  // console.log('Re-Password:', rePassword);
-
   const [ birthdate, setBirthdate ] = useState('');
-  // console.log('Birthdate:', birthdate);
-
   const [ gender, setGender ] = useState('');
-  // console.log('Gender:', gender);
+  const [ height, setHeight ] = useState('');
+  const [ weight, setWeight ] = useState('');
+  const [ age, setAge ] = useState('');
+
   const navigate = useNavigate()
   const handlerSignup = async (e) => {
     e.preventDefault();
-    if(!firstname || !lastname || !email || !password || !rePassword || !birthdate || !gender){
+    if(!firstname || !lastname || !email || !password || !rePassword || !height || !weight || !age || !birthdate || !gender){
       return alert("Form invalid: Please fill empty form")
     }
     if(password !== rePassword){
       return alert("Passwords did not match, please check password and re-password again")
     }
-    const data = {firstname, lastname, email, password, rePassword, birthdate, gender};
+    const data = {firstname, lastname, email, password, rePassword, height, weight, age, birthdate, gender};
     // console.log(data);
     await axios.post('http://localhost:8100/signup', data)
     .then(res => {
@@ -68,6 +59,12 @@ const SignUpPage = () => {
           <input type="password" placeholder="Enter you password" onChange={(e) => setPassword(e.target.value)} />
           <h3>Re-Password<span> *</span></h3>
           <input type="password" placeholder="Enter you password again" onChange={(e) => setRePassword(e.target.value)}/>
+          <h3>Height (CM)<span> *</span></h3>
+          <input type="number" placeholder="Enter your height" onChange={(e) => setHeight(e.target.value)} />
+          <h3>Weight (KG)<span> *</span></h3>
+          <input type="number" placeholder="Enter your weight" onChange={(e) => setWeight(e.target.value)} />
+          <h3>Age (Year)<span> *</span></h3>
+          <input type="number" placeholder="Enter you age" onChange={(e) => setAge(e.target.value)} />
           <h3>Birthdate<span> *</span></h3>
           <input type="date" onChange={(e) => setBirthdate(e.target.value)} />
           <div className="signup-gender">
