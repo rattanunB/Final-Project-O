@@ -11,8 +11,9 @@ const CreateGoalPage = () => {
     activityName: '',
     duration: '',
     distance: '',
-    deadline: new Date(),
-    activityType: 'run'
+    deadline: '',
+    activityType: 'run',
+    status: 'null'
   });
 
   const handleChange = (e) => {
@@ -37,14 +38,12 @@ const CreateGoalPage = () => {
       }
     }
     const res = await axios.post('http://localhost:8100/goal', formData, option);
-    console.log('Response....', res)
-    console.log('Send Data...', formData)
-    console.log('ส่งข้อมูลฟอร์ม:', formData)
+    // console.log('Response....', res)
     navigate('/dashboard')
   };
 
   const handleCancel = () => {
-    console.log("cancle")
+    // console.log("cancle")
     navigate('/dashboard')
   };
 
@@ -60,36 +59,36 @@ const CreateGoalPage = () => {
     <h2>Create Goal</h2>
     <form onSubmit={handleSubmit}>
     <div className='activityTypeSelect'>
-          <span
-            onClick={() => handleActivityTypeChange('run')}
-            className={formData.activityType === 'run' ? 'active' : ''}
-          >
-            <BiRun/>
-          </span>
-          <span
-            onClick={() => handleActivityTypeChange('yoga')}
-            className={formData.activityType === 'yoga' ? 'active' : ''}
-          >
-            <TbYoga/>
-          </span>
-          <span
-            onClick={() => handleActivityTypeChange('bicycle')}
-            className={formData.activityType === 'bicycle' ? 'active' : ''}
-          >
-            <IoMdBicycle/>
-          </span>
-          <span
-            onClick={() => handleActivityTypeChange('weight')}
-            className={formData.activityType === 'weight' ? 'active' : ''}
-          >
-            <GiWeightLiftingUp/>
-          </span>
-          <span
-            onClick={() => handleActivityTypeChange('abs')}
-            className={formData.activityType === 'abs' ? 'active' : ''}
-          >
-            ABS
-          </span>
+      <span
+        onClick={() => handleActivityTypeChange('run')}
+        className={formData.activityType === 'run' ? 'active' : ''}
+      >
+        <BiRun/>
+      </span>
+      <span
+        onClick={() => handleActivityTypeChange('yoga')}
+        className={formData.activityType === 'yoga' ? 'active' : ''}
+      >
+        <TbYoga/>
+      </span>
+      <span
+        onClick={() => handleActivityTypeChange('bicycle')}
+        className={formData.activityType === 'bicycle' ? 'active' : ''}
+      >
+        <IoMdBicycle/>
+      </span>
+      <span
+        onClick={() => handleActivityTypeChange('weight')}
+        className={formData.activityType === 'weight' ? 'active' : ''}
+      >
+        <GiWeightLiftingUp/>
+      </span>
+      <span
+        onClick={() => handleActivityTypeChange('abs')}
+        className={formData.activityType === 'abs' ? 'active' : ''}
+      >
+        ABS
+      </span>
         </div>
       <div className='ActivityWrapInput'>
         <label>Activity Name</label>
@@ -113,13 +112,21 @@ const CreateGoalPage = () => {
       </div>
       <div className='ActivityWrapInput'>
         <label>Distance (Meter)</label>
-        <input
+        {
+          formData.activityType === 'run' || formData.activityType === 'bicycle'?
+          <input
           type="number"
           name="distance"
           value={formData.distance}
           onChange={handleChange}
           className='ActivityInput'
-        />
+          /> :
+          <input
+          disabled
+          value={formData.distance}
+          className='ActivityInput'
+          />
+          }
       </div>
       <div className='ActivityWrapInput'>
         <label>Deadline</label>
