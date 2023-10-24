@@ -28,6 +28,10 @@ function DashBoardBottom({render, setRender}) {
   const [activityDescription, setActivityDescription] = useState('');
   const [activityDuration, setActivityDuration] = useState('');
   const [activityDistance, setActivityDistance] = useState('');
+
+  const [handleError, setHandleError] = useState(false)
+  const [messageError, setMessageError] = useState('')
+
   // สร้างฟังก์ชันเพื่อดึงข้อมูลกิจกรรม
   const fetchActivities = async () => {
     try {
@@ -83,10 +87,15 @@ function DashBoardBottom({render, setRender}) {
         authorization: `Bearer ${accessToken}`
       }
     }
-    const res = await axios.put(`http://localhost:8100/goal/${goalItem._id}`, goalItem, option)
-    fetchGoals();
-    setTimeChanged(true);
-    setRender(true);
+    try {
+      const res = await axios.put(`http://localhost:8100/goal/${goalItem._id}`, goalItem, option)
+      fetchGoals();
+      setTimeChanged(true);
+      setRender(true);
+    } catch (error) {
+      setHandleError(true)
+      setMessageError(error.response.data)
+    }
   };
 
   const handleDoneClick = (goal) => {
@@ -151,7 +160,8 @@ function DashBoardBottom({render, setRender}) {
       fetchActivities();
       setRender(true)
     } catch (error) {
-      console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
+      setHandleError(true)
+      setMessageError(error.response.data)
     }
   };
 
@@ -188,6 +198,11 @@ function DashBoardBottom({render, setRender}) {
       calculateGoalSuccess();
     }
   }, [activitiesChanged, myGoalChanged, timeChanged]);
+
+  useEffect(() => {
+    setHandleError(false)
+    setMessageError('')
+  }, [])
 
   return (
     <div className="dashboard-bottom">
@@ -290,59 +305,67 @@ function DashBoardBottom({render, setRender}) {
         </div>
         {isModalOpen && (
         <div className="modal">
-          <div className="modal-content">
-            <button
-              className="close-button"
-              onClick={() => {
-                setIsModalOpen(false)
-                setEditActivity(false)
-                }}
-            >
-              <AiOutlineClose />
-            </button>
-            <div className="modal-detail-box">
-              <span className="modal-detail-title">Activity Name</span>
-              {
-                editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityName(e.target.value)} value={activityName}/> 
-                : <span className="modal-detail-text">{selectedActivity.activityName}</span>
-              }
-            </div>
-            <div className="modal-detail-box">
-              <span className="modal-detail-title">Activity Description</span>
-              {
-                editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDescription(e.target.value)} value={activityDescription}/> 
-                : <span className="modal-detail-text">{selectedActivity.description}</span>
-              }
-            </div>
-            <div className="modal-detail-box">
-              <span className="modal-detail-title">Duration</span>
-              {
-                editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDuration(e.target.value)} value={activityDuration}/> 
-                : <span className="modal-detail-text">{selectedActivity.duration}</span>
-              }
-            </div>
-            {selectedActivity.distance && (
-            <div className="modal-detail-box">
-              <span className="modal-detail-title">Distance</span>
+            <div className="modal-content">
+              <button
+                className="close-button"
+                onClick={() => {
+                  setIsModalOpen(false)
+                  setEditActivity(false)
+                  setHandleError(false)
+                  setMessageError('')
+                  }}
+              >
+                <AiOutlineClose />
+              </button>
+              <div className="modal-detail-box">
+                <span className="modal-detail-title">Activity Name</span>
                 {
-                  editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDistance(e.target.value)} value={activityDistance}/> 
-                  : <span className="modal-detail-text">{selectedActivity.distance}</span>
+                  editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityName(e.target.value)} value={activityName}/> 
+                  : <span className="modal-detail-text">{selectedActivity.activityName}</span>
                 }
-            </div>
-        )}
-            <div className="action-buttons">
+              </div>
+              <div className="modal-detail-box">
+                <span className="modal-detail-title">Activity Description</span>
+                {
+                  editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDescription(e.target.value)} value={activityDescription}/> 
+                  : !selectedActivity.description ? <span className="modal-detail-text" style={{color:"gray"}}>null</span>
+                  :<span className="modal-detail-text">{selectedActivity.description}</span>
+                }
+              </div>
+              <div className="modal-detail-box">
+                <span className="modal-detail-title">Duration</span>
+                {
+                  editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDuration(e.target.value)} value={activityDuration}/> 
+                  : <span className="modal-detail-text">{selectedActivity.duration}</span>
+                }
+              </div>
+              {selectedActivity.distance && (
+                <div className="modal-detail-box">
+                  <span className="modal-detail-title">Distance</span>
+                    {
+                      editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDistance(e.target.value)} value={activityDistance}/> 
+                      : <span className="modal-detail-text">{selectedActivity.distance}</span>
+                    }
+                </div>
+              )}
             {
-              editActivity ? <button className="edit-button" onClick={() => handleSave()}>Save</button>
-              :<button className="edit-button" onClick={() => handleEditClick()}>Edit</button>
-            }
-              
+              handleError && (
+                <div style={{color:'red'}}>
+                  * {messageError}
+                </div>
+              )
+            }  
+            <div className="action-buttons">
+              {
+                editActivity ? <button className="edit-button" onClick={() => handleSave()}>Save</button>
+                :<button className="edit-button" onClick={() => handleEditClick()}>Edit</button>
+              }
               <button className="delete-button" onClick={() => handleDeleteClick()}>Delete</button>
             </div>
           </div>
         </div>
       )}
       </div>
-      
     </div>
   );
 }

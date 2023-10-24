@@ -23,6 +23,8 @@ const DashboardTop = ({render, setRender}) => {
   const [ activitiesChange, setActivitiesChanged ] = useState(false);
   const [ goalChange, setGoalChange ] = useState(false);
   const [ graph, setGraph ] = useState([]);
+  const [handleError, setHandleError] = useState(false)
+  const [messageError, setMessageError] = useState('')
   
   const handleProfileClick = () => {
     setIsModalOpen(true)
@@ -35,10 +37,15 @@ const DashboardTop = ({render, setRender}) => {
         authorization: `Bearer ${accessToken}`
       }
     }
-    const response = await axios.get('http://localhost:8100/activity', option)
-    setActivities(response.data)
-    setActivitiesChanged(true)
-    setRender(false)
+    try {
+      const response = await axios.get('http://localhost:8100/activity', option)
+      setActivities(response.data)
+      setActivitiesChanged(true)
+      setRender(false)
+    } catch (error) {
+      console.log('Failed get user data')
+      
+    }
   };
 
   const fetchGoals = async () => {
@@ -48,10 +55,14 @@ const DashboardTop = ({render, setRender}) => {
         authorization: `Bearer ${accessToken}`
       }
     }
-    const response = await axios.get('http://localhost:8100/goal', option)
-    setGoals(response.data)
-    setGoalChange(true)
-    setRender(false)
+    try {
+      const response = await axios.get('http://localhost:8100/goal', option)
+      setGoals(response.data)
+      setGoalChange(true)
+      setRender(false)
+    } catch (error) {
+      console.log('Failed get user data')
+    }
   };
 
   const sumActivityDuration = () => {
@@ -174,10 +185,13 @@ const DashboardTop = ({render, setRender}) => {
     try {
       const data = { firstname, lastname, height, weight, age }
       await axios.put('http://localhost:8100/profile', data, option);
-      setModalEdit(false)
-      setIsModalOpen(false)
+      if(!handleError){
+        setModalEdit(false)
+        setIsModalOpen(false)
+      }
     } catch (error) {
-      console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
+      setHandleError(true)
+      setMessageError(error.response.data)
     }
   };
 
@@ -214,29 +228,31 @@ const DashboardTop = ({render, setRender}) => {
     }
   },[render])
 
+  useEffect(() => {
+    setHandleError(false)
+    setMessageError('')
+  },[])
+
   return (
     <div className="dashboard-top-container">
       <div className="top-row">
-        
           <div className="user-info-left">
-            {/* <button className="edit-profile-btn" onClick={() => handleProfileClick()}> */}
-              {
-                user.gender === 'Female' ?
-                <button className="edit-profile-btn" onClick={() => handleProfileClick()}>          
-                  <img
-                    src="https://img.freepik.com/free-vector/beautiful-young-woman-hand-drawn-cartoon-art-illustration_56104-1088.jpg?w=826&t=st=1698121279~exp=1698121879~hmac=a4fcd34389b7459bf00388e349f141b87f29bff8265a99155ec0c2e9e7195788"
-                    alt=""
-                  />
-                </button> 
-                :
-                <button className="edit-profile-btn" onClick={() => handleProfileClick()}>
-                  <img
-                    src="https://img.freepik.com/free-vector/happy-young-man-icon-isolated_24911-109621.jpg?w=740&t=st=1698121411~exp=1698122011~hmac=fc596b6318ad8acd62eb1b7a4d7e74ced08dcedc7c0ccd615678b451523814f6"
-                    alt=""
-                  />
-                </button>
-              }
-            {/* </button> */}
+            {
+              user.gender === 'Female' ?
+              <button className="edit-profile-btn" onClick={() => handleProfileClick()}>          
+                <img
+                  src="https://img.freepik.com/free-vector/beautiful-young-woman-hand-drawn-cartoon-art-illustration_56104-1088.jpg?w=826&t=st=1698121279~exp=1698121879~hmac=a4fcd34389b7459bf00388e349f141b87f29bff8265a99155ec0c2e9e7195788"
+                  alt=""
+                />
+              </button> 
+              :
+              <button className="edit-profile-btn" onClick={() => handleProfileClick()}>
+                <img
+                  src="https://img.freepik.com/free-vector/happy-young-man-icon-isolated_24911-109621.jpg?w=740&t=st=1698121411~exp=1698122011~hmac=fc596b6318ad8acd62eb1b7a4d7e74ced08dcedc7c0ccd615678b451523814f6"
+                  alt=""
+                />
+              </button>
+            }
             <div className="user-name">{user.firstname} {user.lastname}</div>
           </div>
         <div className="user-info-right">
@@ -266,6 +282,8 @@ const DashboardTop = ({render, setRender}) => {
               onClick={() => {
                 setIsModalOpen(false)
                 setModalEdit(false)
+                setHandleError(false)
+                setMessageError('')
                 }}
             >
               <AiOutlineClose />
@@ -305,6 +323,13 @@ const DashboardTop = ({render, setRender}) => {
                 : <span className="modal-detail-text">{user.age}</span>
               }
             </div>
+            {
+              handleError && (
+                <div style={{color:'red'}}>
+                  * {messageError}
+                </div>
+              )
+            }
             <div className="action-buttons">
             {
               modalEdit ? 

@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./LoginPage.scss";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = ({setAuth}) => {
+
+  const [handleError, setHandleError] = useState(false)
+  const [messageError, setMessageError] = useState('')
+
   const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -21,17 +25,21 @@ const LoginPage = ({setAuth}) => {
   const navigate = useNavigate()
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('ข้อมูลที่ส่งไปยังเซิร์ฟเวอร์:', formData);
     try {
       const res = await axios.post('http://localhost:8100/login', formData)
-      console.log(res.data.token)
       localStorage.setItem('accessToken', res.data.token)
-      setAuth(true)
+      setAuth(true)      
       navigate('/')
     } catch (error) {
-      alert(error.response.data)
+      setHandleError(true)
+      setMessageError(error.response.data)
     }
   };
+
+  useEffect(() => {
+    setHandleError(false)
+    setMessageError('')
+  },[])
     
   return (
     <div className="loginPage">
@@ -56,6 +64,13 @@ const LoginPage = ({setAuth}) => {
             onChange={handleInputChange}
           />
         </div>
+        {
+          handleError && (
+            <div style={{color:'red'}}>
+              * {messageError}
+            </div>
+          )
+        }
         <div className='loginBtnWrap'>
             <button type="submit">Login</button>
         </div>

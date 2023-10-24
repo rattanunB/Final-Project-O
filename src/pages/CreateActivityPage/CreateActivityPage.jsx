@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./CreateActivitiyPage.scss";
 import { BiRun } from 'react-icons/bi'
 import { TbYoga } from 'react-icons/tb'
@@ -9,6 +9,8 @@ import axios from 'axios';
 
 const CreateActivityPage = () => {
   const navigate = useNavigate();
+  const [handleError, setHandleError] = useState(false)
+  const [messageError, setMessageError] = useState('')
   const [formData, setFormData] = useState({
     activityName: '',
     activityDescription: '',
@@ -52,7 +54,8 @@ const CreateActivityPage = () => {
         navigate('/dashboard')
       }
     } catch (error) {
-      console.error('Failed to save activity', error);
+      setHandleError(true)
+      setMessageError(error.response.data)
     }
   };
   
@@ -67,6 +70,11 @@ const CreateActivityPage = () => {
       activityType: type
     });
   };
+
+  useEffect(() => {
+    setHandleError(false),
+    setMessageError('')
+  },[])
 
   return (
     <div className='createActivitiyPage'>
@@ -161,6 +169,13 @@ const CreateActivityPage = () => {
             className='ActivityInput'
           />
         </div>
+        {
+          handleError && (
+            <div style={{color:'red'}}>
+              * {messageError}
+            </div>
+          )
+        }
         <div className='activityBtnWrap'>
           <button type="submit">Create Activity</button>
           <button type="button" onClick={handleCancel}>Cancel</button>

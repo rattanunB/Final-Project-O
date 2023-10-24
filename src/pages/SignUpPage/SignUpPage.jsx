@@ -1,5 +1,5 @@
 import "./SignUpPage.scss";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
@@ -15,27 +15,26 @@ const SignUpPage = () => {
   const [ height, setHeight ] = useState('');
   const [ weight, setWeight ] = useState('');
   const [ age, setAge ] = useState('');
+  const [handleError, setHandleError] = useState(false)
+  const [messageError, setMessageError] = useState('')
 
   const navigate = useNavigate()
   const handlerSignup = async (e) => {
     e.preventDefault();
-    if(!firstname || !lastname || !email || !password || !rePassword || !height || !weight || !age || !birthdate || !gender){
-      return alert("Form invalid: Please fill empty form")
-    }
-    if(password !== rePassword){
-      return alert("Passwords did not match, please check password and re-password again")
-    }
     const data = {firstname, lastname, email, password, rePassword, height, weight, age, birthdate, gender};
-    // console.log(data);
-    await axios.post('http://localhost:8100/signup', data)
-    .then(res => {
-      console.log(res);
-    })
-    .catch(error => {
-      console.log(error)
-    })
-    navigate('/login')
+    try {
+      await axios.post('http://localhost:8100/signup', data)
+      navigate('/login')
+    } catch (error) {
+      setHandleError(true)
+      setMessageError(error.response.data)
+    }
   }
+
+  useEffect(() => {
+    setHandleError(false),
+    setMessageError('')
+  },[])
 
   return (
     <div className="signup-page">
@@ -80,6 +79,13 @@ const SignUpPage = () => {
               </div>
             </div>
           </div>
+            {
+              handleError && (
+                <div style={{color:'red'}}>
+                  * {messageError}
+                </div>
+              )
+            }
           <div className="signup-page-btn">
             <a className="signup" href="/login">
               <button onClick={handlerSignup}>Sign Up</button>
