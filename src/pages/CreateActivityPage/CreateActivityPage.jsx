@@ -35,7 +35,7 @@ const CreateActivityPage = () => {
         authorization: `Bearer ${accessToken}`
       }
     }
-    // console.log('formData..',formData)
+    console.log('formData..',formData)
     try {
       const response = await axios.post('http://localhost:8100/activity', formData, option);
       // console.log('response..',response)
@@ -43,7 +43,7 @@ const CreateActivityPage = () => {
         // console.log('Activity saved successfully', formData);
         setFormData({
           activityName: '',
-          activityDescription: '',
+          description: '',
           duration: '',
           distance: '',
           date: new Date().toISOString().split('T')[0],
@@ -117,8 +117,8 @@ const CreateActivityPage = () => {
         <div className='ActivityWrapInput'>
           <label>Activity Description</label>
           <textarea
-            name="activityDescription"
-            value={formData.activityDescription}
+            name="description"
+            value={formData.description}
             onChange={handleChange}
             className='ActivityInput'
           />

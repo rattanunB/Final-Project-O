@@ -3,6 +3,7 @@ import "./DashboardTop.scss";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { Bar } from 'react-chartjs-2';
 import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
 
 ChartJS.register(
   BarElement, CategoryScale, LinearScale, Tooltip, Legend
@@ -10,9 +11,17 @@ ChartJS.register(
 
 const DashboardTop = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalEdit, setModalEdit] = useState(false)
+  const [user, setUser] = useState({});
+  const [ firstname, setFirstname ] = useState('')
+  const [ lastname, setLastname ] = useState('');
+  const [ height, setHeight ] = useState('');
+  const [ weight, setWeight ] = useState('');
+  const [ age, setAge ] = useState('');
+
 
   const handleProfileClick = () => {
-    console.log('MOSS')
+    // console.log('MOSS')
     setIsModalOpen(true)
   }
 
@@ -73,21 +82,54 @@ const DashboardTop = () => {
     },
   };
 
-  // const fetchUser = async () => {
-  //   try {
-  //     const response = await axios.get('http://localhost:8100/signup');
-  //     if (response.status === 200) {
-  //       const user = response.data;
-  //       console.log(user)
-  //     }
-  //   } catch (error) {
-  //     console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
-  //   }
-  // };
+  const fetchUser = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    try {
+      const response = await axios.get('http://localhost:8100/profile',option);
+      if (response.status === 200) {
+        const user = response.data;
+        console.log(user)
+        setUser(user)
+      }
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchUser()
-  // },[])
+  const updateProfile = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    try {
+      const data = { firstname, lastname, height, weight, age }
+      await axios.put('http://localhost:8100/profile', data, option);
+      setModalEdit(false)
+      setIsModalOpen(false)
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
+    }
+  }
+
+  const handleEditClick = () => {
+    setModalEdit(true)
+    setFirstname(user.firstname)
+    setLastname(user.lastname)
+    setHeight(user.height)
+    setWeight(user.weight)
+    setAge(user.age)
+  }
+
+  useEffect(() => {
+    fetchUser()
+  },[modalEdit])
 
   return (
     <div className="dashboard-top-container">
@@ -98,21 +140,21 @@ const DashboardTop = () => {
               src="https://images.pexels.com/photos/878846/pexels-photo-878846.jpeg?auto=compress&cs=tinysrgb&w=1600"
               alt=""
             />
-            <div className="user-name">Nuch-cha Boonyato</div>
+            <div className="user-name">{user.firstname} {user.lastname}</div>
           </div>
       </button>
         <div className="user-info-right">
           <div className="user-info-childbox">
             <span>Height</span>
-            <span>0 CM</span>
+            <span>{user.height} CM</span>
           </div>
           <div className="user-info-childbox">
             <span>Weight</span>
-            <span>0 KG</span>
+            <span>{user.weight} KG</span>
           </div>
           <div className="user-info-childbox">
             <span>Age</span>
-            <span>0</span>
+            <span>{user.age}</span>
           </div>
         </div>
       </div>
@@ -125,25 +167,42 @@ const DashboardTop = () => {
           <div className="modal-content">
             <button
               className="close-button"
-              onClick={() => setIsModalOpen(false)}
+              onClick={() => {
+                setIsModalOpen(false)
+                setModalEdit(false)
+                }}
             >
               <AiOutlineClose />
             </button>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Firstname</span>
-              {/* <span className="modal-detail-text">{selectedActivity.activityName}</span> */}
+              {
+                modalEdit ? <input className="modal-detail-text" value={firstname} onChange={(e) => setFirstname(e.target.value)}/> : <span className="modal-detail-text">{user.firstname}</span>
+              }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Lastname</span>
-              {/* <span className="modal-detail-text">{selectedActivity.activityDescription}</span> */}
+              {
+                modalEdit ? <input className="modal-detail-text" value={lastname} onChange={(e) => setLastname(e.target.value)}/> : <span className="modal-detail-text">{user.lastname}</span>
+              }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Height</span>
-              {/* <span className="modal-detail-text">{selectedActivity.duration}</span> */}
+              {
+                modalEdit ? <input className="modal-detail-text" value={height} onChange={(e) => setHeight(e.target.value)}/> : <span className="modal-detail-text">{user.height}</span>
+              }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Weight</span>
-              {/* <span className="modal-detail-text">{selectedActivity.duration}</span> */}
+              {
+                modalEdit ? <input className="modal-detail-text" value={weight} onChange={(e) => setWeight(e.target.value)}/> : <span className="modal-detail-text">{user.weight}</span>
+              }
+            </div>
+            <div className="modal-detail-box">
+              <span className="modal-detail-title">Age</span>
+              {
+                modalEdit ? <input className="modal-detail-text" value={age} onChange={(e) => setAge(e.target.value)}/> : <span className="modal-detail-text">{user.age}</span>
+              }
             </div>
             {/* {selectedActivity.distance && (
           <div className="modal-detail-box">
@@ -152,7 +211,11 @@ const DashboardTop = () => {
           </div>
         )} */}
             <div className="action-buttons">
-              <button className="edit-button" onClick={() => handleEditClick()}>Edit</button>
+            {
+              modalEdit ? 
+              <button className="edit-button" onClick={() => updateProfile()}>Save</button>
+              : <button className="edit-button" onClick={() => handleEditClick()}>Edit</button>
+            }
             </div>
           </div>
         </div>
