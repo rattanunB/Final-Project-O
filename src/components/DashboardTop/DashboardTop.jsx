@@ -10,10 +10,10 @@ ChartJS.register(
 )
 
 const DashboardTop = ({render, setRender}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalEdit, setModalEdit] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const [user, setUser] = useState({});
-  const [ firstname, setFirstname ] = useState('')
+  const [ firstname, setFirstname ] = useState('');
   const [ lastname, setLastname ] = useState('');
   const [ height, setHeight ] = useState('');
   const [ weight, setWeight ] = useState('');
@@ -21,15 +21,12 @@ const DashboardTop = ({render, setRender}) => {
   const [ activities, setActivities ] = useState([]);
   const [ goals, setGoals ] = useState([]);
   const [ activitiesChange, setActivitiesChanged ] = useState(false);
-  const [ goalChange, setGoalChange ] = useState(false)
+  const [ goalChange, setGoalChange ] = useState(false);
   const [ graph, setGraph ] = useState([]);
-  const [ totalActivitiesDuration, setTotalActivitiesDuration ] = useState({run: 0, yoga: 0, bicycle: 0, weight: 0, abs: 0})
-  const [ totalGoalsDuration, setTotalGoalsDuration ] = useState({run: 0, yoga: 0, bicycle: 0, weight: 0, abs: 0})
-
   
   const handleProfileClick = () => {
     setIsModalOpen(true)
-  }
+  };
 
   const fetchActivities = async () => {
     const accessToken = localStorage.getItem('accessToken')
@@ -42,7 +39,7 @@ const DashboardTop = ({render, setRender}) => {
     setActivities(response.data)
     setActivitiesChanged(true)
     setRender(false)
-  }
+  };
 
   const fetchGoals = async () => {
     const accessToken = localStorage.getItem('accessToken')
@@ -55,7 +52,7 @@ const DashboardTop = ({render, setRender}) => {
     setGoals(response.data)
     setGoalChange(true)
     setRender(false)
-  }
+  };
 
   const sumActivityDuration = () => {
     const findTypeRun = activities.filter(e => e.activityType === 'run')
@@ -90,27 +87,27 @@ const DashboardTop = ({render, setRender}) => {
     
     const data = [ sumRun, sumYoga, sumBicycle, sumWeight, sumAbs ]
     setGraph(data)
-  }
+  };
 
   const data = {
     labels: ['Run', 'Yoga', 'Bike', 'Weight', 'ABS'],
     datasets: [
       {
-        label: "กราฟแสดงเวลาของกิจกรรมทั้งหมด",
+        label: "History Tracking (Minutes)",
         data: [graph[0], graph[1], graph[2], graph[3], graph[4]],
         backgroundColor: [
-          'rgba(75, 192, 192, 1)', // สีแต่งพื้นหลังแต่ละแท่ง
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(153, 102, 255, 1)',
+          'rgba(188, 243, 255, 1)', // สีแต่งพื้นหลังแต่ละแท่ง
+          'rgba(255, 234, 250, 1)',
+          'rgba(273, 255, 162, 1)',
+          'rgba(255, 211, 255, 1)',
+          'rgba(205, 255, 204, 1)',
         ],
         borderColor: [
-          'rgba(75, 192, 192, 1)', // สีเส้นขอบแต่ละแท่ง
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(153, 102, 255, 1)',
+          'rgba(188, 243, 255, 1)', // สีเส้นขอบแต่ละแท่ง
+          'rgba(255, 234, 250, 1)',
+          'rgba(273, 255, 162, 1)',
+          'rgba(255, 211, 255, 1)',
+          'rgba(205, 255, 204, 1)',
         ],
         borderWidth: 1,
       },
@@ -122,8 +119,8 @@ const DashboardTop = ({render, setRender}) => {
       legend: {
         labels: {
           font: {
-            size: 16, // ขนาดของ label "กิจกรรมทางการเรียน"
-            weight: 'normal',
+            size: 17, // ขนาดของ label "กิจกรรมทางการเรียน"
+            weight: 'bold',
           },
         },
       },
@@ -133,7 +130,7 @@ const DashboardTop = ({render, setRender}) => {
         beginAtZero: true,
         ticks: {
           font: {
-            size: 14,
+            size: 16,
             weight: 'bold',
           },
         },
@@ -182,7 +179,7 @@ const DashboardTop = ({render, setRender}) => {
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
     }
-  }
+  };
 
   const handleEditClick = () => {
     setModalEdit(true)
@@ -191,7 +188,7 @@ const DashboardTop = ({render, setRender}) => {
     setHeight(user.height)
     setWeight(user.weight)
     setAge(user.age)
-  }
+  };
 
   useEffect(() => {
     fetchUser()
@@ -220,23 +217,28 @@ const DashboardTop = ({render, setRender}) => {
   return (
     <div className="dashboard-top-container">
       <div className="top-row">
-      <button onClick={() => handleProfileClick()}>
-        <div className="user-info-left">
-          {
-            user.gender === 'Female' ?           
-            <img
-              src="https://img.freepik.com/free-vector/beautiful-young-woman-hand-drawn-cartoon-art-illustration_56104-1088.jpg?w=826&t=st=1698121279~exp=1698121879~hmac=a4fcd34389b7459bf00388e349f141b87f29bff8265a99155ec0c2e9e7195788"
-              alt=""
-            /> 
-            :
-            <img
-              src="https://img.freepik.com/free-vector/happy-young-man-icon-isolated_24911-109621.jpg?w=740&t=st=1698121411~exp=1698122011~hmac=fc596b6318ad8acd62eb1b7a4d7e74ced08dcedc7c0ccd615678b451523814f6"
-              alt=""
-            />
-          }
-          <div className="user-name">{user.firstname} {user.lastname}</div>
-        </div>
-      </button>
+        
+          <div className="user-info-left">
+            {/* <button className="edit-profile-btn" onClick={() => handleProfileClick()}> */}
+              {
+                user.gender === 'Female' ?
+                <button className="edit-profile-btn" onClick={() => handleProfileClick()}>          
+                  <img
+                    src="https://img.freepik.com/free-vector/beautiful-young-woman-hand-drawn-cartoon-art-illustration_56104-1088.jpg?w=826&t=st=1698121279~exp=1698121879~hmac=a4fcd34389b7459bf00388e349f141b87f29bff8265a99155ec0c2e9e7195788"
+                    alt=""
+                  />
+                </button> 
+                :
+                <button className="edit-profile-btn" onClick={() => handleProfileClick()}>
+                  <img
+                    src="https://img.freepik.com/free-vector/happy-young-man-icon-isolated_24911-109621.jpg?w=740&t=st=1698121411~exp=1698122011~hmac=fc596b6318ad8acd62eb1b7a4d7e74ced08dcedc7c0ccd615678b451523814f6"
+                    alt=""
+                  />
+                </button>
+              }
+            {/* </button> */}
+            <div className="user-name">{user.firstname} {user.lastname}</div>
+          </div>
         <div className="user-info-right">
           <div className="user-info-childbox">
             <span>Height</span>

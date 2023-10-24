@@ -68,7 +68,7 @@ function DashBoardBottom({render, setRender}) {
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงข้อมูล Goals', error);
     }
-  }
+  };
 
   useEffect(() => {
     // เรียกใช้งานฟังก์ชันเพื่อดึงข้อมูลเมื่อคอมโพเนนต์ถูกโหลด
@@ -87,7 +87,7 @@ function DashBoardBottom({render, setRender}) {
     fetchGoals();
     setTimeChanged(true);
     setRender(true);
-  }
+  };
 
   const handleDoneClick = (goal) => {
     goal.status = 'true'
@@ -132,7 +132,7 @@ function DashBoardBottom({render, setRender}) {
     setActivityDescription(selectedActivity.description)
     setActivityDuration(selectedActivity.duration)
     setActivityDistance(selectedActivity.distance)
-  }
+  };
 
   const handleSave = async () => {
     const accessToken = localStorage.getItem('accessToken')
@@ -153,7 +153,7 @@ function DashBoardBottom({render, setRender}) {
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
     }
-  }
+  };
 
   const calculateTime = () => {
     let activityDuration = activities.reduce((acc, activity) => acc + (activity.duration), 0);
@@ -164,7 +164,7 @@ function DashBoardBottom({render, setRender}) {
     let mins = sumDuration - (hours * 60);
     setHours(hours);
     setMinutes(mins);
-  }
+  };
 
   const calculateDistance = () => {
     let activityDistance = activities.reduce((acc, activity) => acc + (activity.distance), 0);
@@ -172,13 +172,13 @@ function DashBoardBottom({render, setRender}) {
     let goalDistance = findGoalSuccess.reduce((acc, item) => acc + (item.distance), 0);
     let sumDistance = (activityDistance + goalDistance)/1000;
     setDistance(sumDistance);
-  }
+  };
 
   const calculateGoalSuccess = () => {
     const findGoalSuccess = myGoal.filter((item) => item.status === 'true');
     const sumGoalSuccess = findGoalSuccess.length
     setGoal(sumGoalSuccess)
-  }
+  };
 
   // Calculate total duration from activities and set it when activities changes
   useEffect(() => {
