@@ -10,7 +10,7 @@ import { GiWeightLiftingUp } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 
-function DashBoardBottom() {
+function DashBoardBottom({render, setRender}) {
   const [hours, setHours] = useState("0");
   const [minutes, setMinutes] = useState("0");
   const [distance, setDistance] = useState("0");
@@ -18,12 +18,16 @@ function DashBoardBottom() {
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateActivities, setUpdateActivities] = useState(true)
+  const [editActivity, setEditActivity] = useState(false)
   const [myGoal, setMyGoal] = useState([]);
   const [activities, setActivities] = useState([]);
   const [activitiesChanged, setActivitiesChanged] = useState(false);
   const [myGoalChanged, setMyGoalChanged] = useState(false);
-  const [timeChanged, setTimeChanged] = useState(false)
-
+  const [timeChanged, setTimeChanged] = useState(false);
+  const [activityName, setActivityName] = useState('');
+  const [activityDescription, setActivityDescription] = useState('');
+  const [activityDuration, setActivityDuration] = useState('');
+  const [activityDistance, setActivityDistance] = useState('');
   // สร้างฟังก์ชันเพื่อดึงข้อมูลกิจกรรม
   const fetchActivities = async () => {
     try {
@@ -64,7 +68,7 @@ function DashBoardBottom() {
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงข้อมูล Goals', error);
     }
-  }
+  };
 
   useEffect(() => {
     // เรียกใช้งานฟังก์ชันเพื่อดึงข้อมูลเมื่อคอมโพเนนต์ถูกโหลด
@@ -82,7 +86,8 @@ function DashBoardBottom() {
     const res = await axios.put(`http://localhost:8100/goal/${goalItem._id}`, goalItem, option)
     fetchGoals();
     setTimeChanged(true);
-  }
+    setRender(true);
+  };
 
   const handleDoneClick = (goal) => {
     goal.status = 'true'
@@ -91,7 +96,6 @@ function DashBoardBottom() {
 
   const handleGiveUpClick = (goal) => {
     goal.status = 'false'
-    console.log(goal)
     updateStatus(goal)
   };
 
@@ -102,21 +106,19 @@ function DashBoardBottom() {
 
   const handleDeleteClick = async () => {
     const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken)
     const option = {
       headers: {
         authorization: `Bearer ${accessToken}`
       }
     }
     if (selectedActivity) {
-      const objectId = selectedActivity._id;
       setIsModalOpen(false); // ปิดโมเดลหลังจากลบ
       console.log(`Delete OBJ ${objectId}`);
       try {
         const response = await axios.delete(`http://localhost:8100/activity/${objectId}`, option);
         setUpdateActivities((prevState) => !prevState)
         if (response.status === 200) {
-          console.log(`Activity with ID ${objectId} deleted successfully`);
+          setActivitiesChanged(false)
         }
       } catch (error) {
         console.error(`Failed to delete activity with ID ${objectId}`, error);
@@ -125,12 +127,36 @@ function DashBoardBottom() {
   };
   
   const handleEditClick = () =>{
-    console.log("Clicl Edit!!")
-  }
+    setEditActivity(true)
+    setActivityName(selectedActivity.activityName)
+    setActivityDescription(selectedActivity.description)
+    setActivityDuration(selectedActivity.duration)
+    setActivityDistance(selectedActivity.distance)
+  };
+
+  const handleSave = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    const param = selectedActivity._id
+    try {
+      const data = { activityName, description: activityDescription, duration: activityDuration, distance: activityDistance }
+      await axios.put(`http://localhost:8100/activity/${param}`, data, option);
+      setActivitiesChanged(false)
+      setEditActivity(false)
+      setIsModalOpen(false)
+      fetchActivities();
+      setRender(true)
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
+    }
+  };
 
   const calculateTime = () => {
     let activityDuration = activities.reduce((acc, activity) => acc + (activity.duration), 0);
-    // console.log(activityDuration)
     const findGoalSuccess = myGoal.filter((item) => item.status === 'true');
     let goalDuration = findGoalSuccess.reduce((acc, item) => acc + (item.duration), 0);
     let sumDuration = activityDuration + goalDuration;
@@ -138,7 +164,7 @@ function DashBoardBottom() {
     let mins = sumDuration - (hours * 60);
     setHours(hours);
     setMinutes(mins);
-  }
+  };
 
   const calculateDistance = () => {
     let activityDistance = activities.reduce((acc, activity) => acc + (activity.distance), 0);
@@ -146,13 +172,13 @@ function DashBoardBottom() {
     let goalDistance = findGoalSuccess.reduce((acc, item) => acc + (item.distance), 0);
     let sumDistance = (activityDistance + goalDistance)/1000;
     setDistance(sumDistance);
-  }
+  };
 
   const calculateGoalSuccess = () => {
     const findGoalSuccess = myGoal.filter((item) => item.status === 'true');
     const sumGoalSuccess = findGoalSuccess.length
     setGoal(sumGoalSuccess)
-  }
+  };
 
   // Calculate total duration from activities and set it when activities changes
   useEffect(() => {
@@ -229,33 +255,6 @@ function DashBoardBottom() {
                 <div className="goal-card-detail">
                   <span>Activity name: {goal.activityName}</span>
                   <span>Deadline: {new Date(goal.deadline).toLocaleDateString("en-US").replace(/\//g, '-')}</span>
-
-                  {/* <div className="btn-warp">
-                    {goal.status === 'true' ? (
-                      <span className="status-success">Success</span>
-                    ) : (
-                      <>
-                        {goal.status === 'false'? (
-                          <span className="status-fail">Fail</span>
-                        ) : (
-                          <>
-                            <button
-                              className="btn-giveup"
-                              onClick={() => handleGiveUpClick(goal)}
-                            >
-                              Give up
-                            </button>
-                            <button
-                              className="btn-done"
-                              onClick={() => handleDoneClick(goal)}
-                            >
-                              Done
-                            </button>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </div> */}
                   <div className="btn-warp">
                     {
                       goal.status === 'null' ? 
@@ -294,30 +293,49 @@ function DashBoardBottom() {
           <div className="modal-content">
             <button
               className="close-button"
-              onClick={() => setIsModalOpen(false)}
+              onClick={() => {
+                setIsModalOpen(false)
+                setEditActivity(false)
+                }}
             >
               <AiOutlineClose />
             </button>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Activity Name</span>
-              <span className="modal-detail-text">{selectedActivity.activityName}</span>
+              {
+                editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityName(e.target.value)} value={activityName}/> 
+                : <span className="modal-detail-text">{selectedActivity.activityName}</span>
+              }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Activity Description</span>
-              <span className="modal-detail-text">{selectedActivity.activityDescription}</span>
+              {
+                editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDescription(e.target.value)} value={activityDescription}/> 
+                : <span className="modal-detail-text">{selectedActivity.description}</span>
+              }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Duration</span>
-              <span className="modal-detail-text">{selectedActivity.duration}</span>
+              {
+                editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDuration(e.target.value)} value={activityDuration}/> 
+                : <span className="modal-detail-text">{selectedActivity.duration}</span>
+              }
             </div>
             {selectedActivity.distance && (
-          <div className="modal-detail-box">
-            <span className="modal-detail-title">Distance</span>
-            <span className="modal-detail-text">{selectedActivity.distance}</span>
-          </div>
+            <div className="modal-detail-box">
+              <span className="modal-detail-title">Distance</span>
+                {
+                  editActivity ? <input className="modal-detail-text" onChange={(e) => setActivityDistance(e.target.value)} value={activityDistance}/> 
+                  : <span className="modal-detail-text">{selectedActivity.distance}</span>
+                }
+            </div>
         )}
             <div className="action-buttons">
-              <button className="edit-button" onClick={() => handleEditClick()}>Edit</button>
+            {
+              editActivity ? <button className="edit-button" onClick={() => handleSave()}>Save</button>
+              :<button className="edit-button" onClick={() => handleEditClick()}>Edit</button>
+            }
+              
               <button className="delete-button" onClick={() => handleDeleteClick()}>Delete</button>
             </div>
           </div>

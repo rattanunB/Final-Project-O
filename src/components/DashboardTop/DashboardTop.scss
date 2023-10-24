@@ -25,13 +25,24 @@
           border: solid 7px #ec7854;
         }
       
+        .user-name{
+          width: 100%;
+          font-size: 2rem;
+          background-color: #ffffff;
+          border: solid 7px  #ec7854;
+          padding: 5px 10px;
+          border-radius: 300px;
+          text-align: center;
+        }
 
-      .user-name{
-        font-size: 2rem;
-        background-color: #ec7854;
-        padding: 5px 10px;
-        border-radius: 300px;
-      }
+        // .edit-profile-btn {
+        //   width: 100%;
+        //   max-width: 250px;
+        //   aspect-ratio: 1/1;
+        //   object-fit: cover;
+        //   background-color: #514f4f;
+        //   border-radius: 50%;
+        // }
     }
 
     .user-info-right{
