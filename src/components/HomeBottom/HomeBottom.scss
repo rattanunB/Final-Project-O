@@ -34,4 +34,22 @@
     border-radius: 10px;
   }
 
+  @media (max-width: 1024px) {
+    .home-content{
+      flex-direction: column;
+
+      .paragraph{
+        text-align: center;
+        padding: 0;
+      }
+
+      // &:nth-child(1){
+      //   background-image: url('/HomebottonPic/Bicycle.png');
+      // }
+
+      .activities-pic{
+        display: none;
+      }
+  }
+  }
 }
