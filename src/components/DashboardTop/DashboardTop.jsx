@@ -204,7 +204,7 @@ const DashboardTop = ({render, setRender}) => {
       sumActivityDuration()
     )
     goalChange && (
-      sumGoalDuration()
+      sumActivityDuration()
     )
   },[activitiesChange, goalChange])
 
