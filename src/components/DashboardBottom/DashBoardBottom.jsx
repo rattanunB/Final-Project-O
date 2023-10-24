@@ -10,7 +10,7 @@ import { GiWeightLiftingUp } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 
-function DashBoardBottom() {
+function DashBoardBottom({render, setRender}) {
   const [hours, setHours] = useState("0");
   const [minutes, setMinutes] = useState("0");
   const [distance, setDistance] = useState("0");
@@ -28,7 +28,6 @@ function DashBoardBottom() {
   const [activityDescription, setActivityDescription] = useState('');
   const [activityDuration, setActivityDuration] = useState('');
   const [activityDistance, setActivityDistance] = useState('');
-
   // สร้างฟังก์ชันเพื่อดึงข้อมูลกิจกรรม
   const fetchActivities = async () => {
     try {
@@ -87,6 +86,7 @@ function DashBoardBottom() {
     const res = await axios.put(`http://localhost:8100/goal/${goalItem._id}`, goalItem, option)
     fetchGoals();
     setTimeChanged(true);
+    setRender(true);
   }
 
   const handleDoneClick = (goal) => {
@@ -112,14 +112,13 @@ function DashBoardBottom() {
       }
     }
     if (selectedActivity) {
-      const objectId = selectedActivity._id;
       setIsModalOpen(false); // ปิดโมเดลหลังจากลบ
       console.log(`Delete OBJ ${objectId}`);
       try {
         const response = await axios.delete(`http://localhost:8100/activity/${objectId}`, option);
         setUpdateActivities((prevState) => !prevState)
         if (response.status === 200) {
-          console.log(`Activity with ID ${objectId} deleted successfully`);
+          setActivitiesChanged(false)
         }
       } catch (error) {
         console.error(`Failed to delete activity with ID ${objectId}`, error);
@@ -128,7 +127,6 @@ function DashBoardBottom() {
   };
   
   const handleEditClick = () =>{
-    console.log("Clicl Edit!!")
     setEditActivity(true)
     setActivityName(selectedActivity.activityName)
     setActivityDescription(selectedActivity.description)
@@ -147,8 +145,11 @@ function DashBoardBottom() {
     try {
       const data = { activityName, description: activityDescription, duration: activityDuration, distance: activityDistance }
       await axios.put(`http://localhost:8100/activity/${param}`, data, option);
+      setActivitiesChanged(false)
       setEditActivity(false)
       setIsModalOpen(false)
+      fetchActivities();
+      setRender(true)
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
     }
@@ -156,7 +157,6 @@ function DashBoardBottom() {
 
   const calculateTime = () => {
     let activityDuration = activities.reduce((acc, activity) => acc + (activity.duration), 0);
-    // console.log(activityDuration)
     const findGoalSuccess = myGoal.filter((item) => item.status === 'true');
     let goalDuration = findGoalSuccess.reduce((acc, item) => acc + (item.duration), 0);
     let sumDuration = activityDuration + goalDuration;
@@ -255,33 +255,6 @@ function DashBoardBottom() {
                 <div className="goal-card-detail">
                   <span>Activity name: {goal.activityName}</span>
                   <span>Deadline: {new Date(goal.deadline).toLocaleDateString("en-US").replace(/\//g, '-')}</span>
-
-                  {/* <div className="btn-warp">
-                    {goal.status === 'true' ? (
-                      <span className="status-success">Success</span>
-                    ) : (
-                      <>
-                        {goal.status === 'false'? (
-                          <span className="status-fail">Fail</span>
-                        ) : (
-                          <>
-                            <button
-                              className="btn-giveup"
-                              onClick={() => handleGiveUpClick(goal)}
-                            >
-                              Give up
-                            </button>
-                            <button
-                              className="btn-done"
-                              onClick={() => handleDoneClick(goal)}
-                            >
-                              Done
-                            </button>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </div> */}
                   <div className="btn-warp">
                     {
                       goal.status === 'null' ? 

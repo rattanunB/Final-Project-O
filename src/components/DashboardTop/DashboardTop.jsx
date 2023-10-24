@@ -9,7 +9,7 @@ ChartJS.register(
   BarElement, CategoryScale, LinearScale, Tooltip, Legend
 )
 
-const DashboardTop = () => {
+const DashboardTop = ({render, setRender}) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalEdit, setModalEdit] = useState(false)
   const [user, setUser] = useState({});
@@ -19,9 +19,14 @@ const DashboardTop = () => {
   const [ weight, setWeight ] = useState('');
   const [ age, setAge ] = useState('');
   const [ activities, setActivities ] = useState([]);
+  const [ goals, setGoals ] = useState([]);
   const [ activitiesChange, setActivitiesChanged ] = useState(false);
-  const [graph, setGraph] = useState([]);
+  const [ goalChange, setGoalChange ] = useState(false)
+  const [ graph, setGraph ] = useState([]);
+  const [ totalActivitiesDuration, setTotalActivitiesDuration ] = useState({run: 0, yoga: 0, bicycle: 0, weight: 0, abs: 0})
+  const [ totalGoalsDuration, setTotalGoalsDuration ] = useState({run: 0, yoga: 0, bicycle: 0, weight: 0, abs: 0})
 
+  
   const handleProfileClick = () => {
     setIsModalOpen(true)
   }
@@ -36,6 +41,20 @@ const DashboardTop = () => {
     const response = await axios.get('http://localhost:8100/activity', option)
     setActivities(response.data)
     setActivitiesChanged(true)
+    setRender(false)
+  }
+
+  const fetchGoals = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    const response = await axios.get('http://localhost:8100/goal', option)
+    setGoals(response.data)
+    setGoalChange(true)
+    setRender(false)
   }
 
   const sumActivityDuration = () => {
@@ -50,7 +69,26 @@ const DashboardTop = () => {
     const bicycleDuration = findTypeBicycle.reduce((acc, item) => acc + item.duration, 0)
     const weightDuration = findTypeWeight.reduce((acc, item) => acc + item.duration, 0)
     const absDuration = findTypeAbs.reduce((acc, item) => acc + item.duration, 0)
-    const data = [ runDuration, yogaDuration, bicycleDuration, weightDuration, absDuration ]
+
+    const findGoalTypeRun = goals.filter(e => e.activityType === 'run' && e.status === "true")
+    const findGoalTypeYoga = goals.filter(e => e.activityType === 'yoga' && e.status === "true")
+    const findGoalTypeBicycle = goals.filter(e => e.activityType === 'bicycle' && e.status === "true")
+    const findGoalTypeWeight = goals.filter(e => e.activityType === 'weight' && e.status === "true")
+    const findGoalTypeAbs = goals.filter(e => e.activityType === 'abs' && e.status === "true")
+
+    const goalRunDuration = findGoalTypeRun.reduce((acc, item) => acc + item.duration, 0)
+    const goalYogaDuration = findGoalTypeYoga.reduce((acc, item) => acc + item.duration, 0)
+    const goalBicycleDuration = findGoalTypeBicycle.reduce((acc, item) => acc + item.duration, 0)
+    const goalWeightDuration = findGoalTypeWeight.reduce((acc, item) => acc + item.duration, 0)
+    const goalAbsDuration = findGoalTypeAbs.reduce((acc, item) => acc + item.duration, 0)
+
+    const sumRun = goalRunDuration + runDuration
+    const sumYoga = goalYogaDuration + yogaDuration
+    const sumBicycle = goalBicycleDuration + bicycleDuration
+    const sumWeight = goalWeightDuration + weightDuration
+    const sumAbs = goalAbsDuration + absDuration
+    
+    const data = [ sumRun, sumYoga, sumBicycle, sumWeight, sumAbs ]
     setGraph(data)
   }
 
@@ -158,23 +196,44 @@ const DashboardTop = () => {
   useEffect(() => {
     fetchUser()
     fetchActivities()
+    fetchGoals()
   },[modalEdit])
 
   useEffect(() => {
     activitiesChange && (
       sumActivityDuration()
     )
-  },[activitiesChange])
+    goalChange && (
+      sumGoalDuration()
+    )
+  },[activitiesChange, goalChange])
+
+  useEffect(() => {
+    if(render){
+      fetchActivities();
+      fetchGoals();
+      setActivitiesChanged(false)
+      setGoalChange(false)
+    }
+  },[render])
 
   return (
     <div className="dashboard-top-container">
       <div className="top-row">
       <button onClick={() => handleProfileClick()}>
         <div className="user-info-left">
-          <img
-            src="https://images.pexels.com/photos/878846/pexels-photo-878846.jpeg?auto=compress&cs=tinysrgb&w=1600"
-            alt=""
-          />
+          {
+            user.gender === 'Female' ?           
+            <img
+              src="https://img.freepik.com/free-vector/beautiful-young-woman-hand-drawn-cartoon-art-illustration_56104-1088.jpg?w=826&t=st=1698121279~exp=1698121879~hmac=a4fcd34389b7459bf00388e349f141b87f29bff8265a99155ec0c2e9e7195788"
+              alt=""
+            /> 
+            :
+            <img
+              src="https://img.freepik.com/free-vector/happy-young-man-icon-isolated_24911-109621.jpg?w=740&t=st=1698121411~exp=1698122011~hmac=fc596b6318ad8acd62eb1b7a4d7e74ced08dcedc7c0ccd615678b451523814f6"
+              alt=""
+            />
+          }
           <div className="user-name">{user.firstname} {user.lastname}</div>
         </div>
       </button>
