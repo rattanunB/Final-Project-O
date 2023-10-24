@@ -33,7 +33,8 @@
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       margin: 8px;
       text-align: center;
-      width: 530px;
+      width: 100%;
+      max-width: 530px;
     }
 
     a{
@@ -67,7 +68,17 @@
     }
   
   }
-  
+
+  @media (max-width : 1024px) {
+    .my-container-top, .my-container-bottom{
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .card{
+      width: 100%;
+    }
+  }
 
 }
 
