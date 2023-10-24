@@ -14,7 +14,7 @@
   padding-bottom: 30px;
 }
 .Hometop h1 {
-  font-size: 2vw;
+  font-size: 38px;
   font-weight: 500;
   color: #4A4A4A;
   margin-inline-start: 50px;
@@ -23,7 +23,7 @@
 }
 
 .Hometopdown h2 {
-  font-size: 1.3vw;
+  font-size: 24px;
   font-weight: 300;
   color: #4A4A4A;
   margin-inline-start: 50px;
@@ -32,7 +32,7 @@
   
 }
 .Hometopdown2 {
-  font-size: 1.3vw;
+  font-size: 24px;
   font-weight: 500;
   color: #4A4A4A;
   margin-inline-start: 50px;
@@ -75,5 +75,28 @@
 }
 .Hometopdown a{
   color: #ec7854;
+}
+
+@media (max-width: 1024px) {
+  .first-top{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    background-position: unset;
+    
+    p{
+      font-size: 24px;
+      padding-inline-start: 0;
+    }
+
+    .Hometop{
+      font-size: 2rem;
+    }
+
+    h1, h2, button{
+      margin-inline-start: 0;
+    }
+  }
 }
 

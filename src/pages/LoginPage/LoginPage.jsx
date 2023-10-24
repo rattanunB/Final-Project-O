@@ -36,7 +36,7 @@ const LoginPage = ({setAuth}) => {
   return (
     <div className="loginPage">
       <h2>Login</h2>
-      <div className='goSignup'><span>Don,t have an account?</span><Link to="/signup" className='goSignupPage'>Signup</Link></div>      
+      <div className='goSignup'><span>Don't have an account?</span><Link to="/signup" className='goSignupPage'>Sign Up</Link></div>      
       <form onSubmit={handleSubmit}>
         <div className="loginWrapInput">
           <label>Email</label>
