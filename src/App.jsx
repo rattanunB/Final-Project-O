@@ -12,6 +12,7 @@ import CreateGoalPage from './pages/CreateGoalPage/CreateGoalPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import React, { useState } from 'react';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <div className="app">
         <Navbar auth={auth} setAuth={setAuth}/>
         <Outlet />
+        <Footer/>
       </div>
     );
   };
