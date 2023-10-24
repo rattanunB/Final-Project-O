@@ -18,11 +18,40 @@ const DashboardTop = () => {
   const [ height, setHeight ] = useState('');
   const [ weight, setWeight ] = useState('');
   const [ age, setAge ] = useState('');
-
+  const [ activities, setActivities ] = useState([]);
+  const [ activitiesChange, setActivitiesChanged ] = useState(false);
+  const [graph, setGraph] = useState([]);
 
   const handleProfileClick = () => {
-    // console.log('MOSS')
     setIsModalOpen(true)
+  }
+
+  const fetchActivities = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+    const option = {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    }
+    const response = await axios.get('http://localhost:8100/activity', option)
+    setActivities(response.data)
+    setActivitiesChanged(true)
+  }
+
+  const sumActivityDuration = () => {
+    const findTypeRun = activities.filter(e => e.activityType === 'run')
+    const findTypeYoga = activities.filter(e => e.activityType === 'yoga')
+    const findTypeBicycle = activities.filter(e => e.activityType === 'bicycle')
+    const findTypeWeight = activities.filter(e => e.activityType === 'weight')
+    const findTypeAbs = activities.filter(e => e.activityType === 'abs')
+
+    const runDuration = findTypeRun.reduce((acc, item) => acc + item.duration, 0)
+    const yogaDuration = findTypeYoga.reduce((acc, item) => acc + item.duration, 0)
+    const bicycleDuration = findTypeBicycle.reduce((acc, item) => acc + item.duration, 0)
+    const weightDuration = findTypeWeight.reduce((acc, item) => acc + item.duration, 0)
+    const absDuration = findTypeAbs.reduce((acc, item) => acc + item.duration, 0)
+    const data = [ runDuration, yogaDuration, bicycleDuration, weightDuration, absDuration ]
+    setGraph(data)
   }
 
   const data = {
@@ -30,7 +59,7 @@ const DashboardTop = () => {
     datasets: [
       {
         label: "กราฟแสดงเวลาของกิจกรรมทั้งหมด",
-        data: [360, 240, 320, 300, 360],
+        data: [graph[0], graph[1], graph[2], graph[3], graph[4]],
         backgroundColor: [
           'rgba(75, 192, 192, 1)', // สีแต่งพื้นหลังแต่ละแท่ง
           'rgba(255, 99, 132, 1)',
@@ -93,7 +122,6 @@ const DashboardTop = () => {
       const response = await axios.get('http://localhost:8100/profile',option);
       if (response.status === 200) {
         const user = response.data;
-        console.log(user)
         setUser(user)
       }
     } catch (error) {
@@ -129,19 +157,26 @@ const DashboardTop = () => {
 
   useEffect(() => {
     fetchUser()
+    fetchActivities()
   },[modalEdit])
+
+  useEffect(() => {
+    activitiesChange && (
+      sumActivityDuration()
+    )
+  },[activitiesChange])
 
   return (
     <div className="dashboard-top-container">
       <div className="top-row">
       <button onClick={() => handleProfileClick()}>
         <div className="user-info-left">
-            <img
-              src="https://images.pexels.com/photos/878846/pexels-photo-878846.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <div className="user-name">{user.firstname} {user.lastname}</div>
-          </div>
+          <img
+            src="https://images.pexels.com/photos/878846/pexels-photo-878846.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt=""
+          />
+          <div className="user-name">{user.firstname} {user.lastname}</div>
+        </div>
       </button>
         <div className="user-info-right">
           <div className="user-info-childbox">
@@ -177,39 +212,38 @@ const DashboardTop = () => {
             <div className="modal-detail-box">
               <span className="modal-detail-title">Firstname</span>
               {
-                modalEdit ? <input className="modal-detail-text" value={firstname} onChange={(e) => setFirstname(e.target.value)}/> : <span className="modal-detail-text">{user.firstname}</span>
+                modalEdit ? <input className="modal-detail-text" value={firstname} onChange={(e) => setFirstname(e.target.value)}/> 
+                : <span className="modal-detail-text">{user.firstname}</span>
               }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Lastname</span>
               {
-                modalEdit ? <input className="modal-detail-text" value={lastname} onChange={(e) => setLastname(e.target.value)}/> : <span className="modal-detail-text">{user.lastname}</span>
+                modalEdit ? <input className="modal-detail-text" value={lastname} onChange={(e) => setLastname(e.target.value)}/> 
+                : <span className="modal-detail-text">{user.lastname}</span>
               }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Height</span>
               {
-                modalEdit ? <input className="modal-detail-text" value={height} onChange={(e) => setHeight(e.target.value)}/> : <span className="modal-detail-text">{user.height}</span>
+                modalEdit ? <input className="modal-detail-text" value={height} onChange={(e) => setHeight(e.target.value)}/> 
+                : <span className="modal-detail-text">{user.height}</span>
               }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Weight</span>
               {
-                modalEdit ? <input className="modal-detail-text" value={weight} onChange={(e) => setWeight(e.target.value)}/> : <span className="modal-detail-text">{user.weight}</span>
+                modalEdit ? <input className="modal-detail-text" value={weight} onChange={(e) => setWeight(e.target.value)}/> 
+                : <span className="modal-detail-text">{user.weight}</span>
               }
             </div>
             <div className="modal-detail-box">
               <span className="modal-detail-title">Age</span>
               {
-                modalEdit ? <input className="modal-detail-text" value={age} onChange={(e) => setAge(e.target.value)}/> : <span className="modal-detail-text">{user.age}</span>
+                modalEdit ? <input className="modal-detail-text" value={age} onChange={(e) => setAge(e.target.value)}/> 
+                : <span className="modal-detail-text">{user.age}</span>
               }
             </div>
-            {/* {selectedActivity.distance && (
-          <div className="modal-detail-box">
-            <span className="modal-detail-title">Distance</span>
-            <span className="modal-detail-text">{selectedActivity.distance}</span>
-          </div>
-        )} */}
             <div className="action-buttons">
             {
               modalEdit ? 

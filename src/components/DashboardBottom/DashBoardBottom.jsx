@@ -96,7 +96,6 @@ function DashBoardBottom() {
 
   const handleGiveUpClick = (goal) => {
     goal.status = 'false'
-    console.log(goal)
     updateStatus(goal)
   };
 
@@ -107,7 +106,6 @@ function DashBoardBottom() {
 
   const handleDeleteClick = async () => {
     const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken)
     const option = {
       headers: {
         authorization: `Bearer ${accessToken}`
