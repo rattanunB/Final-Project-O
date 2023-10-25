@@ -121,10 +121,12 @@ function DashBoardBottom({render, setRender}) {
       }
     }
     if (selectedActivity) {
+      const objectId = selectedActivity._id;
       setIsModalOpen(false); // ปิดโมเดลหลังจากลบ
       console.log(`Delete OBJ ${objectId}`);
       try {
         const response = await axios.delete(`http://localhost:8100/activity/${objectId}`, option);
+        console.log(response)
         setUpdateActivities((prevState) => !prevState)
         if (response.status === 200) {
           setActivitiesChanged(false)
@@ -286,7 +288,8 @@ function DashBoardBottom({render, setRender}) {
                         >
                           Done
                         </button>
-                      </> : null
+                      </> 
+                      : null
                     }
                     {
                       goal.status === 'true' ? 
@@ -313,7 +316,7 @@ function DashBoardBottom({render, setRender}) {
                   setEditActivity(false)
                   setHandleError(false)
                   setMessageError('')
-                  }}
+                }}
               >
                 <AiOutlineClose />
               </button>
