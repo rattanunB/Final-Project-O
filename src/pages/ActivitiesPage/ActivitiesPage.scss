@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.activity {
+  width: 100%;
+
+  .activity-type {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+    margin: 65px 0px;
+  }
+
+  .activity-image {
+    width: 35%;
+    height: 100%;
+  }
+  
+  .activity-image img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    border-radius: 15px;  
+  }
+  
+  .activity-detail {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+  }
+  
+  .activity-detail h3 {
+    color: rgba(236, 120, 84, 1);
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    width: 200px;
+    margin: 10px;
+    border: 4px solid rgba(236, 120, 84, 1);
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  #weight-training h3 {
+    width: 300px;
+  }
+  
+  .activity-detail p {
+    font-family: 'Open Sans', sans-serif;
+    width: 95%;
+    text-indent: 30px;
+    margin: 0;
+    padding: 40px 15px;
+    font-size: 20px;
+  }
+  
+  .activity-detail button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    height: 40px;
+    width: 200px;
+    border-radius: 10px;
+    border: 2px solid rgba(236, 120, 84, 1);
+    color: rgb(255, 255, 255);
+    background-color: rgba(236, 120, 84, 1);
+    border: none;
+    margin-top: 25px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgba(236, 120, 84, 1);
+    border: 3.5px solid rgba(236, 120, 84, 1);
+    font-weight: bold;
+  
+  }
+  
+  .btn-getstart {
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+  }
+
+  @media (max-width: 1024px) {
+     .activity-type{
+      width: -webkit-fill-available;
+      padding:1rem;
+      margin:2rem 1rem ;
+      border: solid  rgba(236, 120, 84, 1);
+      border-radius: 15px;
+     }
+
+    .activity-image, .activity-detail{
+      width: 100%;
+
+      p{
+        display: -webkit-box; /* เพื่อให้รองรับเบราวเซอร์ Safari */
+        -webkit-line-clamp: 5; 
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        padding: 0;
+      }
+    }    
+  }
+}
+
+

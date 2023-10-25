@@ -1,0 +1,56 @@
+#home-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  gap: 2rem;
+
+  .home-content{
+    display:flex;
+    justify-content: center;
+    margin: 0 10%;
+
+
+    h1{
+      font-size: 3rem;
+    }
+  }
+
+  .paragraph, .activities-pic {
+    flex: 1;
+    padding:0 2rem;
+  }
+
+  img{
+      width: 100%;
+    }
+
+  button{
+    width: -webkit-fill-available;
+    margin: 25px 50px 0 50px;
+    padding: 1rem 0;
+    background-color: #110c0c;
+    border: 0;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1024px) {
+    .home-content{
+      flex-direction: column;
+
+      .paragraph{
+        text-align: center;
+        padding: 0;
+      }
+
+      // &:nth-child(1){
+      //   background-image: url('/HomebottonPic/Bicycle.png');
+      // }
+
+      .activities-pic{
+        display: none;
+      }
+  }
+  }
+}

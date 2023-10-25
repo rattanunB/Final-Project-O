@@ -1,0 +1,102 @@
+.first-top {
+  background-color: #ffffff;
+  background-image: url('https://cdn.pixabay.com/photo/2021/05/14/08/44/running-6252827_1280.jpg');
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 100px 30px;
+}
+.Hometop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  padding-bottom: 30px;
+}
+.Hometop h1 {
+  font-size: 38px;
+  font-weight: 500;
+  color: #4A4A4A;
+  margin-inline-start: 50px;
+  
+ 
+}
+
+.Hometopdown h2 {
+  font-size: 24px;
+  font-weight: 300;
+  color: #4A4A4A;
+  margin-inline-start: 50px;
+  margin-bottom: 20px;
+  
+  
+}
+.Hometopdown2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #4A4A4A;
+  margin-inline-start: 50px;
+  padding-bottom: 30px;
+  
+
+}
+.Hometopdown button {
+  width: 30vw;
+  padding: 1rem 0;
+  background-color: #110c0c;
+  border: 0;
+  margin-inline-start: 50px;
+}
+
+.Hometopdown button:hover {
+  background-color: #7D7D7D;
+}
+
+.Hometopdown button a {
+  display: inline-block;
+  color: #FFF;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 400;
+  width: 30vw;
+}
+.Hometopdown  {
+  p{
+  
+  font-size: 1.3vw;
+  font-weight: 500;
+  color: #4A4A4A;
+  padding-inline-start: 150px;
+  padding-top:20px;
+  display: block;
+  }
+  
+  
+}
+.Hometopdown a{
+  color: #ec7854;
+}
+
+@media (max-width: 1024px) {
+  .first-top{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    background-position: unset;
+    
+    p{
+      font-size: 24px;
+      padding-inline-start: 0;
+    }
+
+    .Hometop{
+      font-size: 2rem;
+    }
+
+    h1, h2, button{
+      margin-inline-start: 0;
+    }
+  }
+}
+

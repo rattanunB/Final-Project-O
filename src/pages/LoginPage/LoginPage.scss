@@ -1,0 +1,90 @@
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  h2 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+  }
+
+  span, a{
+    font-size: 20px;
+  }
+
+  .goSignup {
+    display: flex;
+    gap: 10px;
+
+    .goSignupPage {
+      color: #ec7854;
+    }
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    max-width: 750px;
+    gap: 3rem;
+    margin-top: 1rem;
+    padding: 0 2rem;
+
+    .loginWrapInput {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      label{
+        font-size: 15px;
+        font-weight: 550;
+      }
+
+      input {
+        height: 40px;
+        border: solid 1px lightgray;
+      }
+    }
+
+    .loginBtnWrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+
+      @media (max-width:1024px) {
+        margin: 0;
+      }
+      
+
+      button {
+        width: 600px;
+        height: 70px;
+        border-radius: 20px;
+        border: solid 0px #ec7854;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:nth-child(1) {
+          background-color: #ec7854;
+          color: white;
+
+          &:hover{
+            
+              border: 3px solid rgba(236, 120, 84, 1);
+              background-color: rgb(255, 255, 255);
+              color: rgba(236, 120, 84, 1);
+            
+          }
+        }
+        &:nth-child(2) {
+          background-color: rgba(214, 214, 214, 1);
+        }
+      }
+    }
+  }
+
+  
+}
+
