@@ -12,7 +12,7 @@ const ContactPage = () => {
       <div className="my-container">
         <div className="my-container-top">
           <div className="card">
-            <img src="src\assets\images\team\bank.jpg" alt="Cat Avatar" />
+            <img src="/Team/bank.jpg" alt="Bank" />
             <h2>Bank</h2>
             <p className="title">Fullstack Developer</p>
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
@@ -23,7 +23,7 @@ const ContactPage = () => {
           </div>
 
           <div className="card">
-            <img className="noom-img" src="src\assets\images\team\noom.jpg" alt="Cat Avatar" />
+            <img className="noom-img" src="/Team/noom.jpg" alt="Noom" />
 
             <h2>Noom</h2>
             <p className="title">Fullstack Developer</p>
@@ -36,7 +36,7 @@ const ContactPage = () => {
         </div>
         <div className="my-container-bottom">
           <div className="card">
-            <img src="src\assets\images\team\pin.jpg" alt="Cat Avatar" />
+            <img src="/Team/pin.jpg" alt="Pin" />
 
             <h2>Pinn</h2>
             <p className="title">Fullstack Developer</p>
@@ -48,7 +48,7 @@ const ContactPage = () => {
           </div>
 
           <div className="card">
-            <img src="src\assets\images\team\pulse.png" alt="Cat Avatar" />
+            <img src="/Team/pulse.png" alt="pulse" />
 
             <h2>Pulse</h2>
             <p className="title">Fullstack Developer</p>
@@ -60,7 +60,7 @@ const ContactPage = () => {
           </div>
 
           <div className="card">
-            <img src="src\assets\images\Team\fluke.jpg" alt="Cat Avatar" />
+            <img src="/Team/fluke.jpg" alt="Fluke" />
 
             <h2>Fluke</h2>
             <p className="title">Fullstack Developer</p>
