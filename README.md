@@ -1,6 +1,6 @@
 <a id="name-logo"></a>
 
-![LOGO](./LOGO.png)
+![LOGO](./README/LOGO.png)
 
 [![NPM version](https://img.shields.io/npm/v/choo.svg?style=flat-square)](https://npmjs.org/package/choo) [![Stability](https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square)](https://nodejs.org/api/documentation.html#documentation_stability_index) [![Standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com) [![Total Downloads](https://poser.pugx.org/aimeos/aimeos-typo3/d/total.svg)]()
 
@@ -66,21 +66,21 @@ Welcome to FitHub, your ultimate fitness companion designed to transform your he
 
 #### Home page
 
-![Home-page](./home_page.png)
+![Home-page](./README/home_page.png)
 
 <!-- <img src="./home_page.png" alt="Logo" width="300" height="200" /> -->
 
 #### Activity page
 
-![Activity-page](./activity_page.png)
+![Activity-page](./README/activity_page.png)
 
 #### Dashboard page
 
-![Dashboard-page](./dashboard_page.png)
+![Dashboard-page](./README/dashboard_page.png)
 
 #### About Us page
 
-![About-us-page](./aboutus_page.png)
+![About-us-page](./README/aboutus_page.png)
 
 #### How it works
 
@@ -101,13 +101,13 @@ To obtain the source codes and the dependent modules, run the git-command in you
 1. Clone Frontend
 
 ```bash
-git clone --recurse-submodules https://github.com/aregtech/areg-sdk.git
+git clone https://github.com/NathanMun/final-project-frontend.git
 ```
 
 2. Clone Backend
 
 ```bash
-git clone --recurse-submodules https://github.com/aregtech/areg-sdk.git
+git clone https://github.com/NathanMun/final-project-backend.git
 ```
 
 3. Install package and dependencies
@@ -122,7 +122,7 @@ npm install
 npm run dev
 ```
 
-💬 &emsp; Ask us about anything [here](https://github.com/alsiam/alsiam/issues)
+💬 &emsp; Ask us about anything [here](https://github.com/NathanMun/final-project-frontend/issues)
 
 <div align="right">[ <a href="#name-logo">↑ Back to top ↑</a> ]</div>
 
@@ -134,9 +134,9 @@ npm run dev
 
 <!-- Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc. -->
 
-[![FitHub-Frontend](https://github-readme-stats.vercel.app/api/pin/?username=alsiam&repo=web-projects&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/alsiam/web-projects)
+[![FitHub-Frontend](https://github-readme-stats.vercel.app/api/pin/?username=NathanMun&repo=final-project-frontend&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/NathanMun/final-project-frontend)
 
-[![FitHub-Backend](https://github-readme-stats.vercel.app/api/pin/?username=ThanyalakTan&repo=final-project-backend&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/ThanyalakTan/final-project-backend)
+[![FitHub-Backend](https://github-readme-stats.vercel.app/api/pin/?username=NathanMun&repo=final-project-backend&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/NathanMun/final-project-backend)
 
 <div align="right">[ <a href="#name-logo">↑ Back to top ↑</a> ]</div>
 
