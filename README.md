@@ -84,7 +84,7 @@ Welcome to FitHub, your ultimate fitness companion designed to transform your he
 
 #### How it works
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](./README/screen_video.gif)
 
 <div align="right">[ <a href="#name-logo">↑ Back to top ↑</a> ]</div>
 
