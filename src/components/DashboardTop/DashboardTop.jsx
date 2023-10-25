@@ -3,6 +3,7 @@ import "./DashboardTop.scss";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { Bar } from 'react-chartjs-2';
 import { AiOutlineClose } from "react-icons/ai";
+import {AiFillEdit} from "react-icons/ai"
 import axios from "axios";
 
 ChartJS.register(
@@ -237,9 +238,11 @@ const DashboardTop = ({render, setRender}) => {
     <div className="dashboard-top-container">
       <div className="top-row">
           <div className="user-info-left">
+            
             {
               user.gender === 'Female' ?
-              <button className="edit-profile-btn" onClick={() => handleProfileClick()}>          
+              <button className="edit-profile-btn" onClick={() => handleProfileClick()}> 
+              <div className="edit-icon"><AiFillEdit/></div>         
                 <img
                   src="https://img.freepik.com/free-vector/beautiful-young-woman-hand-drawn-cartoon-art-illustration_56104-1088.jpg?w=826&t=st=1698121279~exp=1698121879~hmac=a4fcd34389b7459bf00388e349f141b87f29bff8265a99155ec0c2e9e7195788"
                   alt=""
@@ -247,6 +250,7 @@ const DashboardTop = ({render, setRender}) => {
               </button> 
               :
               <button className="edit-profile-btn" onClick={() => handleProfileClick()}>
+                <div className="edit-icon"><AiFillEdit/></div>
                 <img
                   src="https://img.freepik.com/free-vector/happy-young-man-icon-isolated_24911-109621.jpg?w=740&t=st=1698121411~exp=1698122011~hmac=fc596b6318ad8acd62eb1b7a4d7e74ced08dcedc7c0ccd615678b451523814f6"
                   alt=""

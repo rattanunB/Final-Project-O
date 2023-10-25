@@ -8,6 +8,7 @@ import { TbYoga } from "react-icons/tb";
 import { IoMdBicycle } from "react-icons/io";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import {AiFillEdit} from "react-icons/ai"
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -242,6 +243,7 @@ function DashBoardBottom({render, setRender}) {
           <div className="activity-warp">
             {activities.map((activity) => (
               <div className="activity-card" key={activity._id} onClick={() => handleActivityClick(activity)}>
+                <div className="edit-icon"><AiFillEdit/></div>
                 <div className="activity-card-icon">
                   {activity.activityType === "run" && <BiRun />}
                   {activity.activityType === "bicycle" && <IoMdBicycle />}

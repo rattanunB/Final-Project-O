@@ -83,6 +83,15 @@
           padding: 1rem;
           height: 110px;
           cursor: pointer;
+          position: relative;
+
+          .edit-icon{
+            position: absolute;
+            right: 20px;
+            bottom: 15px;
+            color: #ec7854;
+            font-size: 20px;
+          }
 
           .activity-card-icon {
             flex: 1;
