@@ -4,82 +4,94 @@
   margin: 5rem 10rem;
   gap: 50px;
 
-
   .top-row {
     display: flex;
     gap: 50px;
 
     .user-info-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+
+      img {
+        width: 100%;
+        max-width: 250px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 50%;
+        border: solid 7px #ec7854;
+      }
+
+      .user-name {
+        width: 100%;
+        font-size: 2rem;
+        background-color: #ffffff;
+        border: solid 7px #ec7854;
+        padding: 5px 10px;
+        border-radius: 300px;
+        text-align: center;
+      }
+
+      .edit-profile-btn {
+        background: none;
+        border: none;
+        cursor: unset;
+        position: relative;
+        cursor: pointer;
+
+        .edit-icon {
+          position: absolute;
+          right: 30px;
+          bottom: 12px;
+          background: white;
+          border: solid #ec7854;
+          border-radius: 50%;
+          padding: 10px;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .user-info-right {
+      flex: 3;
+      display: flex;
+      border: solid #ec7854;
+      border-radius: 20px;
+
+      .user-info-childbox {
         flex: 1;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        justify-content: center;
+        gap: 40px;
 
-        img {
-          width: 100%;
-          max-width: 250px;
-          aspect-ratio: 1/1;
-          object-fit: cover;
-          border-radius: 50%;
-          border: solid 7px #ec7854;
+        span {
+          &:nth-child(1) {
+            font-size: 2.5rem;
+            font-weight: 600;
+          }
+          &:nth-child(2) {
+            font-size: 1.5rem;
+            background-color: #ec7854;
+            width: 100px;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 20px;
+          }
         }
-      
-        .user-name{
-          width: 100%;
-          font-size: 2rem;
-          background-color: #ffffff;
-          border: solid 7px  #ec7854;
-          padding: 5px 10px;
-          border-radius: 300px;
-          text-align: center;
-        }
-
-        .edit-profile-btn {
-          background: none;
-          border: none;
-        }
-    }
-
-    .user-info-right{
-        flex: 3;
-        display: flex;
-        border: solid #ec7854;
-        border-radius: 20px;
-        
-        .user-info-childbox{
-            flex:1;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-
-            span{
-                &:nth-child(1){
-                    font-size: 2.5rem;
-                    font-weight: 600;
-                }
-                &:nth-child(2){
-                    font-size: 1.5rem;
-                    background-color: #ec7854;
-                    width: 100px;
-                    text-align: center;
-                    padding: 5px 0;
-                    border-radius: 20px;
-                }
-            }
-            
-        }
+      }
     }
   }
 
-  .bottom-row{
+  .bottom-row {
     display: flex;
     justify-content: center;
     width: 100%;
-    max-height: 700px
+    max-height: 700px;
   }
   .modal {
     position: fixed;
@@ -105,22 +117,22 @@
     flex-direction: column;
     gap: 1rem;
 
-    .modal-detail-box{
+    .modal-detail-box {
       display: flex;
       flex-direction: column;
 
-      .modal-detail-title{
+      .modal-detail-title {
         font-size: 1rem;
       }
 
-      .modal-detail-text{
+      .modal-detail-text {
         background-color: #ec7854;
         padding: 5px;
         border-radius: 10px;
       }
     }
   }
-  
+
   .close-button {
     position: absolute;
     top: 10px;
