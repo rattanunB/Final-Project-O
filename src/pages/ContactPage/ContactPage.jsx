@@ -15,7 +15,7 @@ const ContactPage = () => {
             <h2>Bank</h2>
             <p className="title">Fullstack Developer</p>
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>@example.com</p>
+            <p>rattanun901@gmail.com</p>
             <p>
             <a href="https://www.linkedin.com/in/rattanun" target="_blank"><button className="button">Linked</button></a>
             </p>
@@ -27,7 +27,7 @@ const ContactPage = () => {
             <h2>Num</h2>
             <p className="title">Fullstack Developer</p>
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>@example.com</p>
+            <p>nathawut@gmail.com</p>
             <p>
               <a href="https://www.linkedin.com/in/nathawut-munsri/" target="_blank"><button className="button">Linked</button></a>
             </p>
@@ -40,9 +40,9 @@ const ContactPage = () => {
             <h2>Pinn</h2>
             <p className="title">Fullstack Developer</p>
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>@example.com</p>
+            <p>thanyalak@gmail.com</p>
             <p>
-            <a href="https://www.linkedin.com/in/nathawut-munsri/" target="_blank"><button className="button">Linked</button></a>
+            <a href="https://www.linkedin.com/in/thanyalak-tanyianniti/" target="_blank"><button className="button">Linked</button></a>
             </p>
           </div>
 
@@ -52,7 +52,7 @@ const ContactPage = () => {
             <h2>Pulse</h2>
             <p className="title">Fullstack Developer</p>
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>@example.com</p>
+            <p>nuchcha.boonyato@gmail.com</p>
             <p>
             <a href="https://www.linkedin.com/in/nuch-cha-boonyato-498936285" target="_blank"><button className="button">Linked</button></a>
             </p>
@@ -64,7 +64,7 @@ const ContactPage = () => {
             <h2>Fluke</h2>
             <p className="title">Fullstack Developer</p>
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>@example.com</p>
+            <p>supachaiws@gmail.com</p>
             <p>
               <a href="https://www.linkedin.com/in/supachaiws/" target="_blank"><button className="button">Linked</button></a>
             </p>
