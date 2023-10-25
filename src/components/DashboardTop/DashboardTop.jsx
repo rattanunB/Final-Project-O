@@ -38,7 +38,7 @@ const DashboardTop = ({render, setRender}) => {
       }
     }
     try {
-      const response = await axios.get('http://localhost:8100/activity', option)
+      const response = await axios.get('https://final-project-backend-fwqg.onrender.com/activity', option)
       setActivities(response.data)
       setActivitiesChanged(true)
       setRender(false)
@@ -56,7 +56,7 @@ const DashboardTop = ({render, setRender}) => {
       }
     }
     try {
-      const response = await axios.get('http://localhost:8100/goal', option)
+      const response = await axios.get('https://final-project-backend-fwqg.onrender.com/goal', option)
       setGoals(response.data)
       setGoalChange(true)
       setRender(false)
@@ -165,7 +165,7 @@ const DashboardTop = ({render, setRender}) => {
       }
     }
     try {
-      const response = await axios.get('http://localhost:8100/profile',option);
+      const response = await axios.get('https://final-project-backend-fwqg.onrender.com/profile',option);
       if (response.status === 200) {
         const user = response.data;
         setUser(user)
@@ -184,7 +184,7 @@ const DashboardTop = ({render, setRender}) => {
     }
     try {
       const data = { firstname, lastname, height, weight, age }
-      await axios.put('http://localhost:8100/profile', data, option);
+      await axios.put('https://final-project-backend-fwqg.onrender.com/profile', data, option);
       if(!handleError){
         setModalEdit(false)
         setIsModalOpen(false)

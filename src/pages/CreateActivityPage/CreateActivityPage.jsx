@@ -49,7 +49,7 @@ const CreateActivityPage = () => {
     try {
       if (formData.date > new Date()) {
       }
-      const response = await axios.post('http://localhost:8100/activity', formData, option);
+      const response = await axios.post('https://final-project-backend-fwqg.onrender.com/activity', formData, option);
       if (response.status === 200) {
         setFormData({
           activityName: '',

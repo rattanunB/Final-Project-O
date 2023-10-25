@@ -23,7 +23,7 @@ const SignUpPage = () => {
     e.preventDefault();
     const data = {firstname, lastname, email, password, rePassword, height, weight, age, birthdate, gender};
     try {
-      await axios.post('http://localhost:8100/signup', data)
+      await axios.post('https://final-project-backend-fwqg.onrender.com/signup', data)
       navigate('/login')
     } catch (error) {
       setHandleError(true)

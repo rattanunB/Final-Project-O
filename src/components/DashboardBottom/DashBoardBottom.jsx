@@ -41,7 +41,7 @@ function DashBoardBottom({render, setRender}) {
           authorization: `Bearer ${accessToken}`
         }
       }
-      const response = await axios.get('http://localhost:8100/activity',option);
+      const response = await axios.get('https://final-project-backend-fwqg.onrender.com/activity',option);
       if (response.status === 200) {
         const activitiesData = response.data; // ข้อมูลกิจกรรมทั้งหมด
         setActivities(activitiesData); // เก็บข้อมูลใน state
@@ -61,7 +61,7 @@ function DashBoardBottom({render, setRender}) {
           authorization: `Bearer ${accessToken}`
         }
       }
-      const response = await axios.get('http://localhost:8100/goal',option);
+      const response = await axios.get('https://final-project-backend-fwqg.onrender.com/goal',option);
       if (response.status === 200) {
         for (let index = 0; index < response.data.length; index++) {
           if(new Date(response.data[index].deadline) < new Date()) {
@@ -91,7 +91,7 @@ function DashBoardBottom({render, setRender}) {
       }
     }
     try {
-      const res = await axios.put(`http://localhost:8100/goal/${goalItem._id}`, goalItem, option)
+      const res = await axios.put(`https://final-project-backend-fwqg.onrender.com/goal/${goalItem._id}`, goalItem, option)
       fetchGoals();
       setTimeChanged(true);
       setRender(true);
@@ -128,7 +128,7 @@ function DashBoardBottom({render, setRender}) {
       setIsModalOpen(false); // ปิดโมเดลหลังจากลบ
       console.log(`Delete OBJ ${objectId}`);
       try {
-        const response = await axios.delete(`http://localhost:8100/activity/${objectId}`, option);
+        const response = await axios.delete(`https://final-project-backend-fwqg.onrender.com/activity/${objectId}`, option);
         console.log(response)
         setUpdateActivities((prevState) => !prevState)
         if (response.status === 200) {
@@ -158,7 +158,7 @@ function DashBoardBottom({render, setRender}) {
     const param = selectedActivity._id
     try {
       const data = { activityName, description: activityDescription, duration: activityDuration, distance: activityDistance }
-      await axios.put(`http://localhost:8100/activity/${param}`, data, option);
+      await axios.put(`https://final-project-backend-fwqg.onrender.com/activity/${param}`, data, option);
       setActivitiesChanged(false)
       setEditActivity(false)
       setIsModalOpen(false)
