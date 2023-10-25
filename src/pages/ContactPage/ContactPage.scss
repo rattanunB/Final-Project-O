@@ -64,7 +64,14 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 50%;
+      width: 90%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      padding: 20px 0;
+    }
+    
+    .noom-img{
+      object-position: bottom;
     }
   
   }
