@@ -23,6 +23,13 @@
         justify-content: space-between;
         cursor: pointer;
         font-size: 3rem;
+
+        span{
+
+            &:hover{
+                transform: scale(1.15);
+            }
+        }
     }
     
     .activityTypeSelect span.active {    
@@ -67,13 +74,47 @@
         cursor: pointer;
     }
     
-    button:nth-child(1) {
-        background-color: #000000;
+    button:nth-child(1) {        
+        background-color: #EC7854;
     }
     
     /* ลำดับที่ 2 */
     button:nth-child(2) {
-        background-color: #EC7854;
+        background-color: #000000;
     }
+
+    // @keyframes shake {
+    //     0% {
+    //       transform: translateX(0);
+    //     }
+    //     25% {
+    //       transform: translateX(-5px);
+    //     }
+    //     50% {
+    //       transform: translateX(5px);
+    //     }
+    //     75% {
+    //       transform: translateX(-5px);
+    //     }
+    //     100% {
+    //       transform: translateX(0);
+    //     }
+    //     0% {
+    //       transform: scale(1);
+    //     }
+    //     50% {
+    //       transform: scale(1.15);
+    //     }
+    //     100% {
+    //       transform: scale(1);
+    //     }
+    //   }
+    
+    //   .activityTypeSelect {
+    //     span:hover {
+    //       animation: shake 0.3s ease forwards;
+    //     }
+    //   }
+
 }
 
