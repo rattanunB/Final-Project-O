@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BiRun } from 'react-icons/bi'
 import { TbYoga } from 'react-icons/tb'
 import { IoMdBicycle } from 'react-icons/io'
@@ -7,6 +7,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const CreateGoalPage = () => {
+  const [handleError, setHandleError] = useState(false)
+  const [messageError, setMessageError] = useState('')
+
   const [formData, setFormData] = useState({
     activityName: '',
     duration: '',
@@ -37,9 +40,15 @@ const CreateGoalPage = () => {
         authorization: `Bearer ${accessToken}`
       }
     }
-    const res = await axios.post('http://localhost:8100/goal', formData, option);
-    // console.log('Response....', res)
-    navigate('/dashboard')
+    try {
+      const res = await axios.post('http://localhost:8100/goal', formData, option);
+      // console.log('Response....', res)
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error)
+      setHandleError(true)
+      setMessageError(error.response.data)
+    }
   };
 
   const handleCancel = () => {
@@ -53,6 +62,11 @@ const CreateGoalPage = () => {
       activityType: type
     });
   };
+
+  useEffect(() => {
+    setHandleError(false),
+    setMessageError('')
+  },[])
 
   return (
     <div className='createActivitiyPage'>
@@ -138,6 +152,13 @@ const CreateGoalPage = () => {
           className='ActivityInput'
         />
       </div>
+        {
+          handleError && (
+            <div style={{color:'red'}}>
+              * {messageError}
+            </div>
+          )
+        }
       <div className='activityBtnWrap'>
         <button type="submit">Create Goal</button>
         <button type="button" onClick={handleCancel}>Cancel</button>
