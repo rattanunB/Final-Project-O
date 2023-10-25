@@ -59,11 +59,11 @@ const SignUpPage = () => {
           <h3>Re-Password<span> *</span></h3>
           <input type="password" placeholder="Enter you password again" onChange={(e) => setRePassword(e.target.value)}/>
           <h3>Height (CM)<span> *</span></h3>
-          <input type="number" placeholder="Enter your height" onChange={(e) => setHeight(e.target.value)} />
+          <input type="text" placeholder="Enter your height" onChange={(e) => setHeight(e.target.value)} />
           <h3>Weight (KG)<span> *</span></h3>
-          <input type="number" placeholder="Enter your weight" onChange={(e) => setWeight(e.target.value)} />
+          <input type="text" placeholder="Enter your weight" onChange={(e) => setWeight(e.target.value)} />
           <h3>Age (Year)<span> *</span></h3>
-          <input type="number" placeholder="Enter you age" onChange={(e) => setAge(e.target.value)} />
+          <input type="text" placeholder="Enter you age" onChange={(e) => setAge(e.target.value)} />
           <h3>Birthdate<span> *</span></h3>
           <input type="date" onChange={(e) => setBirthdate(e.target.value)} />
           <div className="signup-gender">
