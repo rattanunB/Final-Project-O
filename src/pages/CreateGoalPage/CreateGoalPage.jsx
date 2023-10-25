@@ -48,7 +48,7 @@ const CreateGoalPage = () => {
       }
     }
     try {
-      const res = await axios.post('http://localhost:8100/goal', formData, option);
+      const res = await axios.post('https://final-project-backend-fwqg.onrender.com/goal', formData, option);
       navigate('/dashboard')
     } catch (error) {
       console.log(error)

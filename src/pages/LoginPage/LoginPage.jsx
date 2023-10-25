@@ -26,7 +26,7 @@ const LoginPage = ({setAuth}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8100/login', formData)
+      const res = await axios.post('https://final-project-backend-fwqg.onrender.com/login', formData)
       localStorage.setItem('accessToken', res.data.token)
       setAuth(true)      
       navigate('/')
