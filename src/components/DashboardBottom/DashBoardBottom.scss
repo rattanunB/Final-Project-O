@@ -327,5 +327,17 @@
       background-color: #ec7854;
     }
   }
+
+  @media (max-width:1024px) {
+    margin: 0 5%;
+    .top-row{
+      gap: 2rem
+    }
+
+    .bottom-row{
+      flex-direction: column;
+      margin: 1rem 0;
+    }
+  }
 }
 

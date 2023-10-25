@@ -143,4 +143,26 @@
     cursor: pointer;
     padding: 5px;
   }
+
+  @media (max-width:1024px) {
+    .top-row{
+      flex-direction: column;
+
+      .user-info-right{
+        padding: 1rem;
+      }
+    } 
+    
+    .bottom-row{
+      width: 100%;
+    }
+  }
+
+  @media (max-width:750px){
+    .user-info-right{
+      padding: 1rem;
+      flex-direction: column;
+      border:none;
+    }
+  }
 }
