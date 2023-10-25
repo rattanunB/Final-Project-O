@@ -1,7 +1,7 @@
 import "./SignUpPage.scss";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const SignUpPage = () => {
 
@@ -42,7 +42,7 @@ const SignUpPage = () => {
         <h2>Sign Up</h2>
         <p>Already a member?
           <span>
-            <a href="/login">Log In</a>
+            <Link to="/login">Log In</Link>
           </span>
         </p>
       </div>
@@ -87,12 +87,12 @@ const SignUpPage = () => {
               )
             }
           <div className="signup-page-btn">
-            <a className="signup" href="/login">
+            <Link className="signup" to="/login">
               <button onClick={handlerSignup}>Sign Up</button>
-            </a>
-            <a className="cancel" href="/">
+            </Link>
+            <Link className="cancel" to="/">
               <button>Cancel</button>
-            </a>
+            </Link>
           </div>
         </form>
       </div>

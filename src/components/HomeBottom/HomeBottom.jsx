@@ -1,5 +1,6 @@
 import React from 'react';
 import './HomeBottom.scss';
+import { Link } from 'react-router-dom';
 
 const HomeBottom = ({auth}) => {
     console.log('Auth...', auth)
@@ -11,13 +12,13 @@ const HomeBottom = ({auth}) => {
                 <p>Welcome to our fitness app designed to help you achieve your fitness goal and transform your body and mind.</p>
                 {
                     auth ? 
-                    <a href="/activities">
+                    <Link to="/activities">
                         <button type="button">GET  START</button>
-                    </a>
+                    </Link>
                     : 
-                    <a href="/login">
+                    <Link to="/login">
                         <button type="button">GET  START</button>
-                    </a>
+                    </Link>
                 }
                 
             </div>
@@ -35,13 +36,13 @@ const HomeBottom = ({auth}) => {
                 <p>Easily track your Workouts, set Training Plans, and discover new Workout Routines to crush your goals.</p>
                 {
                     auth ?
-                    <a href="/creategoal">
+                    <Link to="/creategoal">
                         <button type="button">SET GOAL</button>
-                    </a>
+                    </Link>
                     :
-                    <a href="/login">
+                    <Link to="/login">
                         <button type="button">SET GOAL</button>
-                    </a>
+                    </Link>
                 }
             </div>
         </div>

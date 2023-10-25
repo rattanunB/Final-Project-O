@@ -1,5 +1,6 @@
 import React from "react";
 import "./ContactPage.scss";
+import { Link } from "react-router-dom";
 const ContactPage = () => {
   return (
     <div className="contact-container">
@@ -17,7 +18,7 @@ const ContactPage = () => {
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>rattanun901@gmail.com</p>
             <p>
-            <a href="https://www.linkedin.com/in/rattanun" target="_blank"><button className="button">Linked</button></a>
+            <Link to="https://www.linkedin.com/in/rattanun" target="_blank"><button className="button">Linked</button></Link>
             </p>
           </div>
 
@@ -29,7 +30,7 @@ const ContactPage = () => {
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>nathawut.munsri@gmail.com</p>
             <p>
-              <a href="https://www.linkedin.com/in/nathawut-munsri/" target="_blank"><button className="button">Linked</button></a>
+              <Link to="https://www.linkedin.com/in/nathawut-munsri/" target="_blank"><button className="button">Linked</button></Link>
             </p>
           </div>
         </div>
@@ -42,7 +43,7 @@ const ContactPage = () => {
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>thanyalaktanyianiti@gmail.com</p>
             <p>
-            <a href="https://www.linkedin.com/in/thanyalak-tanyianniti/" target="_blank"><button className="button">Linked</button></a>
+            <Link to="https://www.linkedin.com/in/thanyalak-tanyianniti/" target="_blank"><button className="button">Linked</button></Link>
             </p>
           </div>
 
@@ -54,7 +55,7 @@ const ContactPage = () => {
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>nuchcha.boonyato@gmail.com</p>
             <p>
-            <a href="https://www.linkedin.com/in/nuch-cha-boonyato-498936285" target="_blank"><button className="button">Linked</button></a>
+            <Link to="https://www.linkedin.com/in/nuch-cha-boonyato-498936285" target="_blank"><button className="button">Linked</button></Link>
             </p>
           </div>
 
@@ -66,7 +67,7 @@ const ContactPage = () => {
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>Supachai.wans@gmail.com</p>
             <p>
-              <a href="https://www.linkedin.com/in/supachaiws/" target="_blank"><button className="button">Linked</button></a>
+              <Link to="https://www.linkedin.com/in/supachaiws/" target="_blank"><button className="button">Linked</button></Link>
             </p>
           </div>
         </div>

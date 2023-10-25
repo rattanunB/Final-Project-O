@@ -1,5 +1,6 @@
 import React from "react";
 import "./navbar.scss";
+import { Link } from "react-router-dom";
 
 const Navbar = ({auth,setAuth}) => {
   const accessToken = localStorage.getItem('accessToken')
@@ -14,34 +15,34 @@ const Navbar = ({auth,setAuth}) => {
     <>
       <div className="container">
         <div className="logo">
-          <a href="/">
+          <Link to="/">
             <p>
               <span className="fit">Fit</span>
               <span className="hub">Hub</span>
             </p>
-          </a>
+          </Link>
         </div>
         <div className="center__nav">
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
           {
-            auth ? <a href="/activities">Activity</a>
+            auth ? <Link to="/activities">Activity</Link>
             :
-            <a href="/login">Activity</a>
+            <Link to="/login">Activity</Link>
           }
           
           {
-            auth ? <a href="/dashboard">Dashboard</a>
+            auth ? <Link to="/dashboard">Dashboard</Link>
             : null
           }
-          <a href="/contact">About Us</a>
+          <Link to="/contact">About Us</Link>
         </div>
         <div className="last__nav">
           {
-            auth ? <a href="/" onClick={clearToken}>Log out</a>
+            auth ? <Link to="/" onClick={clearToken}>Log out</Link>
             :
             <>
-              <a href="/login">Log In</a>
-              <a href="/signup">Sign Up</a>
+              <Link to="/login">Log In</Link>
+              <Link to="/signup">Sign Up</Link>
             </> 
           } 
         </div>

@@ -9,6 +9,7 @@ import { IoMdBicycle } from "react-icons/io";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function DashBoardBottom({render, setRender}) {
   const [hours, setHours] = useState("0");
@@ -255,7 +256,7 @@ function DashBoardBottom({render, setRender}) {
                 </div>
               </div>
             ))}
-            <a href="/createactivity" className="btn-create"><span>Create Activity</span></a>
+            <Link to="/createactivity" className="btn-create"><span>Create Activity</span></Link>
           </div>
         </div>
 
@@ -306,7 +307,7 @@ function DashBoardBottom({render, setRender}) {
                 </div>
               </div>
             ))}
-            <a href="/creategoal" className="btn-create"><span>Create Goal</span></a>
+            <Link to="/creategoal" className="btn-create"><span>Create Goal</span></Link>
           </div>
         </div>
         {isModalOpen && (
