@@ -15,7 +15,6 @@ const ContactPage = () => {
             <img src="/Team/bank.jpg" alt="Bank" />
             <h2>Bank</h2>
             <p className="title">Fullstack Developer</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>rattanun901@gmail.com</p>
             <p>
             <Link to="https://www.linkedin.com/in/rattanun" target="_blank"><button className="button">Linked</button></Link>
@@ -27,7 +26,6 @@ const ContactPage = () => {
 
             <h2>Noom</h2>
             <p className="title">Fullstack Developer</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>nathawut.munsri@gmail.com</p>
             <p>
               <Link to="https://www.linkedin.com/in/nathawut-munsri/" target="_blank"><button className="button">Linked</button></Link>
@@ -40,7 +38,6 @@ const ContactPage = () => {
 
             <h2>Pinn</h2>
             <p className="title">Fullstack Developer</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>thanyalaktanyianiti@gmail.com</p>
             <p>
             <Link to="https://www.linkedin.com/in/thanyalak-tanyianniti/" target="_blank"><button className="button">Linked</button></Link>
@@ -52,7 +49,6 @@ const ContactPage = () => {
 
             <h2>Pulse</h2>
             <p className="title">Fullstack Developer</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
             <p>nuchcha.boonyato@gmail.com</p>
             <p>
             <Link to="https://www.linkedin.com/in/nuch-cha-boonyato-498936285" target="_blank"><button className="button">Linked</button></Link>
@@ -64,8 +60,7 @@ const ContactPage = () => {
 
             <h2>Fluke</h2>
             <p className="title">Fullstack Developer</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>Supachai.wans@gmail.com</p>
+            <p>supachai.wans@gmail.com</p>
             <p>
               <Link to="https://www.linkedin.com/in/supachaiws/" target="_blank"><button className="button">Linked</button></Link>
             </p>
