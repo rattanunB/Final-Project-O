@@ -144,7 +144,12 @@
     padding: 5px;
   }
 
-  @media (max-width:1024px) {
+
+
+  @media (max-width:1024px) {  
+    width: -webkit-fill-available;
+    margin: 1rem 1rem;
+    
     .top-row{
       flex-direction: column;
 
@@ -158,11 +163,26 @@
     }
   }
 
-  @media (max-width:750px){
-    .user-info-right{
+  @media (max-width:750px){    
+    .top-row{
+      .user-info-right{
       padding: 1rem;
       flex-direction: column;
       border:none;
+      gap: 20px;
+      border: none;
+
+      .user-info-childbox{
+        gap: 10px;
+        border: solid #ec7854;
+        border-radius: 15px;
+        padding: 1rem 0 ;
+      }
     }
+    }   
+
+    
+
   }
+ 
 }

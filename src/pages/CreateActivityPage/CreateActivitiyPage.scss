@@ -1,8 +1,10 @@
 .createActivitiyPage{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: -webkit-fill-available;
     align-items: center;
+    padding: 0 1rem;
+    
 
     h2{
         font-size: 2rem;
