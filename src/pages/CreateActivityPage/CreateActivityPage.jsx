@@ -20,9 +20,18 @@ const CreateActivityPage = () => {
     activityType: 'run'
   });
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if ( name == 'date') {
+      const currentDate = new Date();
+      if(new Date(value) > currentDate) {
+        setHandleError(true)
+        setMessageError('Cannot select a date that is greater than current date')
+        return 
+      } else {
+        setHandleError(false)
+      }
+    }
     setFormData({
       ...formData,
       [name]: value
@@ -37,18 +46,17 @@ const CreateActivityPage = () => {
         authorization: `Bearer ${accessToken}`
       }
     }
-    console.log('formData..',formData)
     try {
+      if (formData.date > new Date()) {
+      }
       const response = await axios.post('http://localhost:8100/activity', formData, option);
-      // console.log('response..',response)
       if (response.status === 200) {
-        // console.log('Activity saved successfully', formData);
         setFormData({
           activityName: '',
           description: '',
           duration: '',
           distance: '',
-          date: new Date().toISOString().split('T')[0],
+          date: new Date(),
           activityType: 'run'
         });
         navigate('/dashboard')
@@ -60,7 +68,6 @@ const CreateActivityPage = () => {
   };
   
   const handleCancel = () => {
-    // console.log("cancle")
     navigate('/dashboard')
   };
 

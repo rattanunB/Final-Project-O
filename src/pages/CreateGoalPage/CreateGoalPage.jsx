@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const CreateGoalPage = () => {
   const [handleError, setHandleError] = useState(false)
   const [messageError, setMessageError] = useState('')
-
   const [formData, setFormData] = useState({
     activityName: '',
     duration: '',
@@ -21,7 +20,16 @@ const CreateGoalPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log("Name-Value", name, value)
+    if ( name == 'deadline') {
+      const currentDate = new Date();
+      if(currentDate > new Date(value)) {
+        setHandleError(true)
+        setMessageError('Please select a deadline that is greater than current date 1 day')
+        return 
+      } else {
+        setHandleError(false)
+      }
+    }
     setFormData({
       ...formData,
       [name]: value
@@ -34,7 +42,6 @@ const CreateGoalPage = () => {
     e.preventDefault();
 
     const accessToken = localStorage.getItem('accessToken')
-    // console.log(accessToken);
     const option = {
       headers: {
         authorization: `Bearer ${accessToken}`
@@ -42,7 +49,6 @@ const CreateGoalPage = () => {
     }
     try {
       const res = await axios.post('http://localhost:8100/goal', formData, option);
-      // console.log('Response....', res)
       navigate('/dashboard')
     } catch (error) {
       console.log(error)
@@ -52,7 +58,6 @@ const CreateGoalPage = () => {
   };
 
   const handleCancel = () => {
-    // console.log("cancle")
     navigate('/dashboard')
   };
 
