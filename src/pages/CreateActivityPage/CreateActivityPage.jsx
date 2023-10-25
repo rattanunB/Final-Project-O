@@ -134,7 +134,7 @@ const CreateActivityPage = () => {
         <div className='ActivityWrapInput'>
           <label>Duration (Minute)</label>
           <input
-            type="number"
+            type="text"
             name="duration"
             value={formData.duration}
             onChange={handleChange}
@@ -146,7 +146,7 @@ const CreateActivityPage = () => {
           {
             formData.activityType === 'run' || formData.activityType === 'bicycle'?
             <input
-            type="number"
+            type="text"
             name="distance"
             value={formData.distance}
             onChange={handleChange}
