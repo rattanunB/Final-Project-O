@@ -46,7 +46,6 @@ function DashBoardBottom({render, setRender}) {
         const activitiesData = response.data; // ข้อมูลกิจกรรมทั้งหมด
         setActivities(activitiesData); // เก็บข้อมูลใน state
         setActivitiesChanged(true); // ตั้งค่าให้มีการเปลี่ยนแปลงใน activities
-
       }
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงข้อมูลกิจกรรม', error);
@@ -64,10 +63,14 @@ function DashBoardBottom({render, setRender}) {
       }
       const response = await axios.get('http://localhost:8100/goal',option);
       if (response.status === 200) {
+        for (let index = 0; index < response.data.length; index++) {
+          if(new Date(response.data[index].deadline) < new Date()) {
+            response.data[index].status = 'false'
+          }          
+        }
         const goalsData = response.data; // ข้อมูลกิจกรรมทั้งหมด
         setMyGoal(goalsData); // เก็บข้อมูลใน state
         setMyGoalChanged(true); // ตั้งค่าให้มีการเปลี่ยนแปลงใน myGoal
-
       }
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงข้อมูล Goals', error);
