@@ -7,7 +7,7 @@ const ActivitiesPage = () => {
     <div className="activity">
       <div className="activity-type">
         <div className="activity-image">
-          <img src="src\assets\images\running-activity.png" alt="running image" />
+          <img src="images\running-activity.png" alt="running image" />
         </div>
         <div className="activity-detail">
           <h3>Running</h3>
@@ -21,7 +21,7 @@ const ActivitiesPage = () => {
       </div>
       <div className="activity-type">
         <div  className="activity-image">
-          <img src="src\assets\images\yoga-activity.png" alt="yoga image"/>
+          <img src="images\yoga-activity.png" alt="yoga image"/>
         </div>
         <div className="activity-detail">
           <h3>Yoga</h3>
@@ -35,7 +35,7 @@ const ActivitiesPage = () => {
       </div>
       <div className="activity-type">
         <div  className="activity-image">
-          <img src="src\assets\images\bike-activity.png" alt="biking image"/>
+          <img src="images\bike-activity.png" alt="biking image"/>
         </div>
         <div className="activity-detail">
           <h3>Bike</h3>
@@ -49,7 +49,7 @@ const ActivitiesPage = () => {
       </div>
       <div className="activity-type">
         <div  className="activity-image">
-          <img src="src\assets\images\abs-image.png" alt="abs image" />
+          <img src="images\abs-image.png" alt="abs image" />
         </div>
         <div className="activity-detail">
           <h3>ABS</h3>
@@ -63,7 +63,7 @@ const ActivitiesPage = () => {
       </div>
       <div className="activity-type">
         <div  className="activity-image">
-          <img src="src\assets\images\weight-activity.png" alt="body weight image"/>
+          <img src="images\weight-activity.png" alt="body weight image"/>
         </div>
         <div className="activity-detail" id='weight-training'>
           <h3>Weight Training</h3>
